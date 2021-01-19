@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminServiceService} from "../admin-service.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-admin',
@@ -26,8 +27,13 @@ export class AdminComponent implements OnInit {
   }
 
   public addMultipleUser(): void {
-    this.adminService.addMultipleUsers().subscribe(response => {
-      alert(response);
+    this.adminService.addMultipleUsers().subscribe(res => {
+      alert(res.message);
+      if(res.message === "Multiple user added successfully") {
+        this.getUserList();
+      }
+    },(error: HttpErrorResponse) => {
+      alert(error.error.message);
     });
   }
 

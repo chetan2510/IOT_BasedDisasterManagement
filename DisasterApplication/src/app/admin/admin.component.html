@@ -1,0 +1,43 @@
+<div>
+  <h1>Users component active</h1>
+</div>
+
+<!--  <div *ngFor="let qwe of users">-->
+<table>
+  <th>User Name</th>
+  <th>Latitude</th>
+  <th>Longitude</th>
+
+  <tr *ngFor="let users of userArray">
+    <td>{{users.userName}}</td>
+    <td>{{users.latitude}}</td>
+    <td>{{users.longitude}}</td>
+  </tr>
+</table>
+
+<br><br>
+
+<div>
+  <h2>
+    Add Mutiple Users
+  </h2>
+  <div>
+    <button (click) = "addMultipleUser()"> Add Multiple Users</button>
+  </div>
+</div>
+
+<br>
+
+<div>
+<h2>
+  Delte a User
+</h2>
+  <div>
+    <label>UserName:
+      <input [(ngModel)]='userNameToBeDeleted' placeholder="User Name"/>
+    </label>
+
+    <button (click) = "deleteUser()"> Remove User</button>
+  </div>
+
+</div>

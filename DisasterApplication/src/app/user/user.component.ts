@@ -10,15 +10,13 @@ declare const L: any;
 
 export class UserComponent implements OnInit {
 
-  
-
   public mymap: any;
   public title = 'Covorsicht';
 
   public emergencyType;
 
-  
- 
+
+
 public changeSelectionOverviewExample(value){
 
   this.emergencyType = value
@@ -32,7 +30,7 @@ public changeSelectionOverviewExample(value){
     {value: 'others', viewValue: 'Others'}
   ];
 
- 
+
 
   items: any[] = [
     {value: 'critical', viewValue: 'Critical'},
@@ -47,24 +45,15 @@ public changeSelectionOverviewExample(value){
     {value: 'normal', viewValue: 'Normal'},
     {value: 'good', viewValue: 'Good'}
   ];
- 
-  ngOnInit() {
 
-    
+  ngOnInit() {
     if (!navigator.geolocation) {
       console.log('location is not supported');
-
-      
     }
 
-
-    
     navigator.geolocation.getCurrentPosition((position) => {
       const coords = position.coords;
       const latLong = [coords.latitude, coords.longitude];
-
-      
-
 
       console.log(
         `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
@@ -87,8 +76,6 @@ public changeSelectionOverviewExample(value){
       let marker = L.marker(latLong).addTo(this.mymap);
       marker.bindPopup('<b>You</b>').openPopup();
 
-  
-
       // let markerB = L.marker(latLongB).addTo(mymap);
       // markerB.bindPopup('<b>HiB</b>').openPopup();
 
@@ -101,7 +88,7 @@ public changeSelectionOverviewExample(value){
         fillColor: '#f03',
         fillOpacity: 0.5,
         radius: 1500
-        
+
     }).addTo(this.mymap);
 
       let popup = L.popup()
@@ -113,8 +100,6 @@ public changeSelectionOverviewExample(value){
   }
 
   happen(){
-
-  
 
       const latLongA = [50.1200336+0.00619366, 8.6527636];
 
@@ -131,11 +116,9 @@ public changeSelectionOverviewExample(value){
       let markerC = L.marker(latLongC).addTo(this.mymap);
       markerC.bindPopup('<b>RescueCentre C</b>').openPopup();
 
-   
+
 
     }
-        
-  
 
   watchPosition() {
     let desLat = 0;

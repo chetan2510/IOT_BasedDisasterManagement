@@ -8,19 +8,25 @@ import { UserComponent } from './user/user.component';
 import {MatSelectModule} from '@angular/material/select';
 import { ButtonsComponent } from './user/buttons/buttons.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminComponent } from './admin/admin.component';
+import {HttpClientModule} from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    ButtonsComponent
+    ButtonsComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     MatSelectModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

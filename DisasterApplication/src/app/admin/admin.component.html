@@ -3,7 +3,7 @@
 </div>
 
 <!--  <div *ngFor="let qwe of users">-->
-<table>
+<table *ngIf="userArray">
   <th>User Name</th>
   <th>Latitude</th>
   <th>Longitude</th>
@@ -24,6 +24,14 @@
   <div>
     <button (click) = "addMultipleUser()"> Add Multiple Users</button>
   </div>
+
+  <br>
+  <h2>
+    Clear All Users
+  </h2>
+  <div>
+    <button (click) = "clearAllUsers()"> Clear All Users</button>
+  </div>
 </div>
 
 <br>
@@ -41,3 +49,44 @@
   </div>
 
 </div>
+
+<br>
+<br>
+
+<div>
+  <h1>Rescuers component active</h1>
+</div>
+
+<!--  <div *ngFor="let qwe of rescuers">-->
+<table *ngIf="rescuerArray">
+  <th>Rescue Name</th>
+  <th>Latitude</th>
+  <th>Longitude</th>
+
+  <tr *ngFor="let rescuer of rescuerArray">
+    <td>{{rescuer.rescuerName}}</td>
+    <td>{{rescuer.latitude}}</td>
+    <td>{{rescuer.longitude}}</td>
+  </tr>
+</table>
+
+<br><br>
+
+<div>
+  <h2>
+    Add Mutiple rescuers
+  </h2>
+  <div>
+    <button (click) = "addMultipleRescuer()"> Add Multiple Rescuers</button>
+  </div>
+
+  <br>
+  <h2>
+    Clear All Rescuers
+  </h2>
+  <div>
+    <button (click) = "clearAllRescuer()"> Clear All Rescuers</button>
+  </div>
+</div>
+
+<br>

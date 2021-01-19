@@ -11,6 +11,7 @@ export class AdminComponent implements OnInit {
 
   public userArray: any = [];
   public userNameToBeDeleted = "";
+  public rescuerArray: any = [];
   constructor(private adminService: AdminServiceService) { }
 
   ngOnInit(): void {
@@ -20,6 +21,7 @@ export class AdminComponent implements OnInit {
   private getUserList(): void {
       this.adminService.getUserList().subscribe(res => {
         console.log(res.length);
+        this.userArray = [];
         for(let i =0; i < res.length; i++) {
           this.userArray.push(res[i]);
         }
@@ -37,15 +39,57 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  public clearAllUsers(): void {
+    this.adminService.clearAllUsers().subscribe(res => {
+      alert(res.message);
+      this.userArray = [];
+    },(error: HttpErrorResponse) => {
+      alert(error.error.message);
+    });
+  }
+
   public deleteUser(): void {
     if(this.userNameToBeDeleted.trim() === "") {
       alert("user field cannot be left empty");
     } else {
       this.adminService.deleteUser(this.userNameToBeDeleted).subscribe(res => {
-        console.log(res.message);
+        alert(res.message);
+        this.getUserList();
+      },(error: HttpErrorResponse) => {
+        alert(error.error.message);
       });
-      alert("User delete successfull");
       this.userNameToBeDeleted = "";
     }
+  }
+
+
+  private getRescuerList(): void {
+    this.adminService.getAllRescuers().subscribe(res => {
+      console.log(res.length);
+      this.rescuerArray = [];
+      for(let i =0; i < res.length; i++) {
+        this.rescuerArray.push(res[i]);
+      }
+    });
+  }
+
+  public addMultipleRescuer(): void {
+    this.adminService.addMultipleRescuers().subscribe(res => {
+      alert(res.message);
+      if(res.message === "Multiple rescuers added to the list") {
+        this.getRescuerList();
+      }
+    },(error: HttpErrorResponse) => {
+      alert(error.error.message);
+    });
+  }
+
+  public clearAllRescuer(): void {
+    this.adminService.clearAllRescuers().subscribe(res => {
+      alert(res.message);
+      this.rescuerArray = [];
+    },(error: HttpErrorResponse) => {
+      alert(error.error.message);
+    });
   }
 }

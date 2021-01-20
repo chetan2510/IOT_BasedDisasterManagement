@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
+import {User} from "./User";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,10 @@ export class AdminServiceService {
   private clearAllUsersURl = "http://localhost:9902/user/clearallusers";
   private getAllRescuersURL = "http://localhost:9902/rescuer/getallrescuers";
   private addMultipleRescuersURL = "http://localhost:9902/rescuer/addmultiplerescuers";
-  private clearAllRescuerURL = "http://localhost:9902/rescuer/clearallrescuers"
-
-
+  private clearAllRescuerURL = "http://localhost:9902/rescuer/clearallrescuers";
+  private addUserURL = "http://localhost:9902/user/adduser";
+  private sendNotificationToUserURL = "http://localhost:9902/admin/sendNotificationToUsers";
+  private sendNotificationToRescuerURL = "http://localhost:9902/admin/sendNotificationToRescuers";
 
   constructor(private http: HttpClient) { }
 
@@ -45,5 +47,9 @@ export class AdminServiceService {
 
   clearAllRescuers() : Observable<any> {
     return this.http.get(this.clearAllRescuerURL);
+  }
+
+  addUser(user: User) : Observable<any> {
+    return this.http.post(this.addUserURL, user);
   }
 }

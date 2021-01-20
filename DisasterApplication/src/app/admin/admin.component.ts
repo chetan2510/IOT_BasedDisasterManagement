@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminServiceService} from "../admin-service.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {User} from "../User";
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +13,15 @@ export class AdminComponent implements OnInit {
   public userArray: any = [];
   public userNameToBeDeleted = "";
   public rescuerArray: any = [];
-  constructor(private adminService: AdminServiceService) { }
+  user: User = {
+    userName: "",
+    latitude: "",
+    longitude: ""
+  };
+  public userNameToBeAdded;
+  public latitude;
+  public longitude;
+  constructor(private adminService: AdminServiceService) {  }
 
   ngOnInit(): void {
     this.getUserList();
@@ -91,5 +100,20 @@ export class AdminComponent implements OnInit {
     },(error: HttpErrorResponse) => {
       alert(error.error.message);
     });
+  }
+
+  public addUser(): void {
+    if(this.userNameToBeAdded.trim() !== "" && this.latitude.trim() !== "" && this.longitude.trim() !== "") {
+      this.user.userName = this.userNameToBeAdded;
+      this.user.latitude = this.latitude;
+      this.user.longitude = this.longitude;
+      this.adminService.addUser(this.user).subscribe(res => {
+        alert(res.message);
+        this.getUserList();
+      }, (error: HttpErrorResponse) => {
+        alert(error.error.message);});
+    } else {
+      alert("Please fill all the fields");
+    }
   }
 }

@@ -38,7 +38,7 @@
 
 <div>
 <h2>
-  Delte a User
+  Delete a User
 </h2>
   <div>
     <label>UserName:
@@ -49,6 +49,24 @@
   </div>
 
 </div>
+
+<h2>
+  Add a User
+</h2>
+<div>
+  <label>UserName:
+    <input [(ngModel)]='userNameToBeAdded' placeholder="User Name"/>
+  </label>
+  <label>Latitude:
+    <input [(ngModel)]='latitude' placeholder="latitude"/>
+  </label>
+  <label>Longitude:
+    <input [(ngModel)]='longitude' placeholder="longitude"/>
+  </label>
+
+  <button (click) = "addUser()"> Remove/Update User</button>
+</div>
+
 
 <br>
 <br>

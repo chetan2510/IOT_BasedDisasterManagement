@@ -92,6 +92,38 @@
 
 <div>
   <h2>
+    Delete a Rescuer
+  </h2>
+  <div>
+    <label>RescuerName:
+      <input [(ngModel)]='rescuerNameToBeDeleted' placeholder="Rescuer Name"/>
+    </label>
+
+    <button (click) = "deleteRescuer()"> Remove Rescuer</button>
+  </div>
+
+</div>
+
+<h2>
+  Add a Rescuer
+</h2>
+<div>
+  <label>Rescuer Name:
+    <input [(ngModel)]='rescuerNameToBeAdded' placeholder="Rescuer Name"/>
+  </label>
+  <label>Latitude:
+    <input [(ngModel)]='rescuerlatitude' placeholder="latitude"/>
+  </label>
+  <label>Longitude:
+    <input [(ngModel)]='rescuerlongitude' placeholder="longitude"/>
+  </label>
+
+  <button (click) = "addRescuer()"> Remove/Update Rescuer</button>
+</div>
+
+
+<div>
+  <h2>
     Add Mutiple rescuers
   </h2>
   <div>
@@ -108,3 +140,15 @@
 </div>
 
 <br>
+
+<h1>Notification sender</h1>
+
+<div>
+  <label>Notification Message:
+    <input type ="text" [(ngModel)]='notificationMessage' placeholder="Notification Message"/>
+  </label>
+
+  <button (click) = "sendNotificationToUser()"> Send Notification to User</button>
+  <button (click) = "sendNotificationToRescuer()"> Send Notification to Rescuer</button>
+</div>
+

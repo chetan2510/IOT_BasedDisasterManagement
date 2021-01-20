@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminServiceService} from "../admin-service.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {User} from "../User";
+import {Rescuer} from "../Rescuer";
 
 @Component({
   selector: 'app-admin',
@@ -11,20 +12,34 @@ import {User} from "../User";
 export class AdminComponent implements OnInit {
 
   public userArray: any = [];
+  public notificationMessage;
   public userNameToBeDeleted = "";
+  public rescuerNameToBeDeleted = "";
   public rescuerArray: any = [];
   user: User = {
     userName: "",
     latitude: "",
     longitude: ""
   };
+
+  rescuer: Rescuer = {
+    rescuerName: "",
+    latitude: "",
+    longitude: ""
+  };
+
   public userNameToBeAdded;
   public latitude;
   public longitude;
+  public rescuerNameToBeAdded;
+  public rescuerlatitude;
+  public rescuerlongitude;
+
   constructor(private adminService: AdminServiceService) {  }
 
   ngOnInit(): void {
     this.getUserList();
+    this.getRescuerList();
   }
 
   private getUserList(): void {
@@ -115,5 +130,52 @@ export class AdminComponent implements OnInit {
     } else {
       alert("Please fill all the fields");
     }
+  }
+
+
+  public addRescuer(): void {
+    if(this.rescuerNameToBeAdded.trim() !== "" && this.rescuerlatitude.trim() !== "" && this.rescuerlongitude.trim() !== "") {
+      this.rescuer.rescuerName = this.rescuerNameToBeAdded;
+      this.rescuer.latitude = this.rescuerlatitude;
+      this.rescuer.longitude = this.rescuerlongitude;
+      this.adminService.addRescuer(this.rescuer).subscribe(res => {
+        alert(res.message);
+        this.getRescuerList();
+      }, (error: HttpErrorResponse) => {
+        alert(error.error.message);});
+    } else {
+      alert("Please fill all the fields");
+    }
+  }
+
+  public deleteRescuer(): void {
+    if(this.rescuerNameToBeDeleted.trim() === "") {
+      alert("rescuer name field cannot be left empty");
+    } else {
+      this.adminService.deleteRescuer(this.rescuerNameToBeDeleted).subscribe(res => {
+        alert(res.message);
+        this.getRescuerList();
+      },(error: HttpErrorResponse) => {
+        alert(error.error.message);
+      });
+      this.rescuerNameToBeDeleted = "";
+    }
+  }
+
+  public sendNotificationToUser(): void {
+      this.adminService.sendNotificationToUser(this.notificationMessage).subscribe(res => {
+        alert(res.notificationMessage);
+      },(error: HttpErrorResponse) => {
+        alert(error.error.message);
+      });
+
+  }
+
+  public sendNotificationToRescuer(): void {
+      this.adminService.sendNotificationToRescuer(this.notificationMessage).subscribe(res => {
+        alert(res.notificationMessage);
+      },(error: HttpErrorResponse) => {
+        alert(error.error.message);
+      });
   }
 }

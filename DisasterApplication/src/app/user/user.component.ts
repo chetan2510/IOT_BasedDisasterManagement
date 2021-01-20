@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AdminServiceService} from "../admin-service.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 declare const L: any;
 
@@ -14,6 +16,8 @@ export class UserComponent implements OnInit {
   public title = 'Covorsicht';
 
   public emergencyType;
+  public userArray: any = [];
+  constructor(private adminService: AdminServiceService) { }
 
 
 
@@ -47,9 +51,18 @@ public changeSelectionOverviewExample(value){
   ];
 
   ngOnInit() {
+    this.generateMap();
+  }
+
+  generateMap(){
     if (!navigator.geolocation) {
       console.log('location is not supported');
     }
+
+
+
+
+
 
     navigator.geolocation.getCurrentPosition((position) => {
       const coords = position.coords;
@@ -73,8 +86,42 @@ public changeSelectionOverviewExample(value){
         }
       ).addTo(this.mymap);
 
-      let marker = L.marker(latLong).addTo(this.mymap);
-      marker.bindPopup('<b>You</b>').openPopup();
+  //     var redIcon = L.icon.Default({
+  //      iconUrl: '/img/marker-icon-2x-black.png/',
+  //      shadowUrl: '/img/marker-icon-black.png/',
+  //       iconSize: [38, 95],
+  //       iconAnchor: [22, 94],
+  //       popupAnchor: [-3, -76],
+  //       shadowSize: [68, 95],
+  //       shadowAnchor: [22, 94]
+  //  });
+
+
+  var greenIcon = L.icon({
+    iconUrl: 'assets/img/red_shadow.png',
+   // iconRetinaUrl: 'img/marker-icon-2x-black.png',
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+  
+
+    // var  redIcon = L.AwesomeMarkers.icon({
+    //   markerColor: "red"
+    //   });
+
+   // var redIcon = L.Icon.Default.prototype.options({className: 'my-div-icon'});
+  
+   
+     // let marker = new L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
+
+     var myIcon = L.divIcon({className: 'my-div-icon'});
+
+     L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
+      //marker.bindPopup('<b>You</b>').openPopup();
+      //marker._icon.classList.add("huechange");
 
       // let markerB = L.marker(latLongB).addTo(mymap);
       // markerB.bindPopup('<b>HiB</b>').openPopup();
@@ -99,22 +146,42 @@ public changeSelectionOverviewExample(value){
     this.watchPosition();
   }
 
-  happen(){
+  async happen(){
 
-      const latLongA = [50.1200336+0.00619366, 8.6527636];
+    //while (true){
 
-      const latLongB = [50.161064818858684, 8.748550415039064];
+    
 
-      const latLongC = [50.12982265022155, 8.75267028808594];
+    this.adminService.getUserList().subscribe(res => {
+      console.log("total entries: "+res.length);
+       this.userArray = [];
+       for(let i =18; i < 21; i++) {
+        const latLongA= [ res[i].latitude, res[i].longitude];
+        let markerA = L.marker(latLongA).addTo(this.mymap);
+        markerA.bindPopup('<b>RescueCentre A</b>').openPopup();
+        console.log("latLong: "+latLongA)
 
-      let markerA = L.marker(latLongA).addTo(this.mymap);
-      markerA.bindPopup('<b>RescueCentre A</b>').openPopup();
+         //this.userArray.push(res[i].latitude);
+       }
+       console.log(this.userArray);
+    });
+   // await delay(10000);
+ // }
 
-      let markerB = L.marker(latLongB).addTo(this.mymap);
-      markerB.bindPopup('<b>RescueCentre B</b>').openPopup();
+      //const latLongA = [50.1200336+0.00619366, 8.6527636];
 
-      let markerC = L.marker(latLongC).addTo(this.mymap);
-      markerC.bindPopup('<b>RescueCentre C</b>').openPopup();
+    //  const latLongB = [50.161064818858684, 8.748550415039064];
+
+      //const latLongC = [50.12982265022155, 8.75267028808594];
+
+    //  let markerA = L.marker(latLongA).addTo(this.mymap);
+    //  markerA.bindPopup('<b>RescueCentre A</b>').openPopup();
+
+     // let markerB = L.marker(latLongB).addTo(this.mymap);
+     // markerB.bindPopup('<b>RescueCentre B</b>').openPopup();
+
+     // let markerC = L.marker(latLongC).addTo(this.mymap);
+     // markerC.bindPopup('<b>RescueCentre C</b>').openPopup();
 
 
 
@@ -142,4 +209,9 @@ public changeSelectionOverviewExample(value){
       }
     );
   }
+  
+}
+
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
 }

@@ -14,6 +14,7 @@ export class UserComponent implements OnInit {
 
   public mymap: any;
   public title = 'Covorsicht';
+  private userNotification;
 
   public emergencyType;
   public userArray: any = [];
@@ -106,15 +107,15 @@ public changeSelectionOverviewExample(value){
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
-  
+
 
     // var  redIcon = L.AwesomeMarkers.icon({
     //   markerColor: "red"
     //   });
 
    // var redIcon = L.Icon.Default.prototype.options({className: 'my-div-icon'});
-  
-   
+
+
      // let marker = new L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
 
      var myIcon = L.divIcon({className: 'my-div-icon'});
@@ -150,7 +151,7 @@ public changeSelectionOverviewExample(value){
 
     //while (true){
 
-    
+
 
     this.adminService.getUserList().subscribe(res => {
       console.log("total entries: "+res.length);
@@ -209,7 +210,22 @@ public changeSelectionOverviewExample(value){
       }
     );
   }
-  
+
+  public getUserNotification(): void {
+    this.adminService.getUserNotification().subscribe(res => {
+      if( res.notification === "") {
+        alert("Message: No notification avaialable")
+      } else {
+        alert("Message: "+res.notification);
+      }
+      this.userNotification = res.notification;
+    },(error: HttpErrorResponse) => {
+      alert(error.error.message);
+    });
+  }
+
+
+
 }
 
 function delay(ms: number) {

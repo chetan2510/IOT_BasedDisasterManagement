@@ -21,6 +21,8 @@ export class AdminServiceService {
   private deleteRescuerURL = "http://localhost:9902/rescuer/deleterescuer";
   private sendNotificationToUserURL = "http://localhost:9902/admin/sendNotificationtousers";
   private sendNotificationToRescuerURL = "http://localhost:9902/admin/sendnotificationtorescuers";
+  private getUserNotificationURL = "http://localhost:9902/user/getusernotification";
+  private getRescuerNotificationURL = "http://localhost:9902/rescuer/getrescuernotification";
 
   constructor(private http: HttpClient) { }
 
@@ -72,5 +74,12 @@ export class AdminServiceService {
     return this.http.post(this.sendNotificationToRescuerURL + "?notification=" + notification, null);
   }
 
+  getUserNotification() : Observable<any> {
+    return this.http.get(this.getUserNotificationURL);
+  }
+
+  getRescuerNotification() : Observable<any> {
+    return this.http.get(this.getRescuerNotificationURL);
+  }
 
 }

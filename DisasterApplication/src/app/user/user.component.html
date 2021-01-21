@@ -64,6 +64,17 @@
        <app-buttons></app-buttons>
     </div>
 
+      <br>
+      <br>
+      <div>
+        <button (click)="getUserNotification()">Show Notification</button>
+      </div>
+
+
+      <div *ngIf="userNotification">
+        <h2>{{userNotification}}</h2>
+      </div>
+
 
 
 

@@ -53,16 +53,18 @@ public changeSelectionOverviewExample(value){
 
   ngOnInit() {
     this.generateMap();
+    this.getDistance();
+    
   }
 
   generateMap(){
+
+
+
+
     if (!navigator.geolocation) {
       console.log('location is not supported');
     }
-
-
-
-
 
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -101,27 +103,44 @@ public changeSelectionOverviewExample(value){
   var greenIcon = L.icon({
     iconUrl: 'assets/img/red_shadow.png',
    // iconRetinaUrl: 'img/marker-icon-2x-black.png',
-    iconSize:     [38, 95], // size of the icon
-    shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    iconSize:     [25, 41], // size of the icon
+   // shadowSize:   [50, 64], // size of the shadow
+  //  iconAnchor:   [30, 48], // point of the icon which will correspond to marker's location
+  //  shadowAnchor: [4, 62],  // the same for the shadow
+  //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
 
-    // var  redIcon = L.AwesomeMarkers.icon({
-    //   markerColor: "red"
-    //   });
+// var theMarker = {};
 
-   // var redIcon = L.Icon.Default.prototype.options({className: 'my-div-icon'});
+// //var theMarker = L.layerGroup().addTo(this.mymap);
+
+//   this.mymap.on('click',function(e){
+//     console.log("clicked")
+//    const latA = e.latlng.lat;
+//     const lonA = e.latlng.lng;
+
+//     console.log("You clicked the map at LAT: "+ latA+" and LONG: "+lonA );
+//         //Clear existing marker, 
+
+//         // if (theMarker != undefined) {
+//         //       theMarker.remove() ;
+//         // };
+
+//     //Add a marker to show where you clicked.
+//       theMarker = L.marker([latA,lonA]).addTo(this.mymap); 
+     // theMarker.addLayer(this.mymap) 
+//});
+
+   
 
 
      // let marker = new L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
 
-     var myIcon = L.divIcon({className: 'my-div-icon'});
+     
 
-     L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
-      //marker.bindPopup('<b>You</b>').openPopup();
+     let marker =L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
+      marker.bindPopup('<b>You</b>').openPopup();
       //marker._icon.classList.add("huechange");
 
       // let markerB = L.marker(latLongB).addTo(mymap);
@@ -129,6 +148,21 @@ public changeSelectionOverviewExample(value){
 
       // let markerC = L.marker(latLongC).addTo(mymap);
       // markerC.bindPopup('<b>HiC</b>').openPopup();
+
+//    HERE
+var markerFrom = L.marker([50.120033,8.6527636], { color: "#F00", radius: 10 });
+var markerTo =  L.circleMarker([50.161064818858684,8.748550415039064], { color: "#4AFF00", radius: 10 });
+var from = markerFrom.getLatLng();
+var to = markerTo.getLatLng();
+markerFrom.bindPopup('pointA ' + (from).toString());
+markerTo.bindPopup('pointB ' + (to).toString());
+this.mymap.addLayer(markerTo);
+this.mymap.addLayer(markerFrom);
+var disatance = from.distanceTo(to)
+
+console.log("distance from point a to point B",from.distanceTo(to).toString(),"m");
+
+// HERE
 
 
       var circle = L.circle(latLong, {
@@ -147,25 +181,157 @@ public changeSelectionOverviewExample(value){
     this.watchPosition();
   }
 
-  async happen(){
+  getDistance(){
+
+
+
+// var _distance;
+// var _length;
+//   const latLongZ = [50.1200336+0.00619366, 8.6527636];
+//  const latLongY = [50.161064818858684, 8.748550415039064];
+//   //function refreshDistanceAndLength() {
+//     _distance = L.GeometryUtil.distance(this.mymap, latLongZ, latLongY);
+//    // _length = L.GeometryUtil.length([_firstPoint, _secondPoint]);
+//     console.log("Distance is:",_distance);
+//     console.log("Distance is:",_length);
+
+
+//     var
+//   _firstLatLng,
+//   _firstPoint,
+//   _secondLatLng,
+//   _secondPoint,
+//   _distance,
+//   _length,
+//   _polyline;
+
+//   Function
+//   this.mymap.on('click', function(e) {
+
+//     if (!_firstLatLng) {
+//       _firstLatLng = e.latlng;
+//       _firstPoint = e.layerPoint;
+//       L.marker(_firstLatLng).addTo(this.mymap).bindPopup('Point A<br/>' + e.latlng + '<br/>' + e.layerPoint).openPopup();
+//     } else {
+//       _secondLatLng = e.latlng;
+//       _secondPoint = e.layerPoint;
+//       L.marker(_secondLatLng).addTo(this.map).bindPopup('Point B<br/>' + e.latlng + '<br/>' + e.layerPoint).openPopup();
+//     }
+  
+//     if (_firstLatLng && _secondLatLng) {
+//       // draw the line between points
+//       L.polyline([_firstLatLng, _secondLatLng], {
+//         color: 'red'
+//       }).addTo(this.mymap);
+  
+//       refreshDistanceAndLength();
+//     }
+//   })
+
+// //Function
+//   this.mymap.on('zoomend', function(e) {
+//     refreshDistanceAndLength();
+//   })
+
+// //Function
+// const latLongZ = [50.1200336+0.00619366, 8.6527636];
+//  const latLongY = [50.161064818858684, 8.748550415039064];
+//   function refreshDistanceAndLength() {
+//     _distance = L.GeometryUtil.distance(this.mymap, _firstLatLng, _secondLatLng);
+//     _length = L.GeometryUtil.length([_firstPoint, _secondPoint]);
+//     console.log("Distance is:",_distance);
+//     console.log("Distance is:",_length);
+//    // document.getElementById('distance').innerHTML = _distance;
+//    // document.getElementById('length').innerHTML = _length;
+//   }
+
+  };
+
+
+
+   async happen(){
 
     //while (true){
+console.log("here we go again")
+
+     // var map;
+     // var markers = [];
+     // var locationCoor = []; 
+      //var marker;
+      let markersLayer = new L.layerGroup(); //new L.FeatureGroup(); // NOTE: Layer is created here!
+      console.log("Starting",markersLayer);
+     
+
+    //  markersLayer.clearLayers();
+
+      this.adminService.getUserList().subscribe(res => {
+        console.log("total entries: "+res.length);
+// NOTE: The first thing we do here is clear the markers from the layer.
+
+//this.mymap.removeLayer(markersLayer)
+//console.log("Starting ahead",markersLayer)
+//markersLayer.clearLayers();
+console.log("Layer is cleard",markersLayer);
+
+for(let i =0; i < res.length; i++) {
+  
+
+  var latA = res[i].latitude;
+  var lonA = res[i].longitude;
+ // locationCoor[i]=[latA,lonA];
+
+  let marker = L.marker([latA, lonA]).bindPopup('<b>RescueCentre A</b>');
+  console.log("Marker value: ",marker)
+
+//console.log("I am before for loop");
+marker.addTo(markersLayer);
+//markersLayer.addLayer(marker); 
+        console.log("I am in for loop",markersLayer);
+
+}
+console.log("I am outside for loop");
 
 
 
-    this.adminService.getUserList().subscribe(res => {
-      console.log("total entries: "+res.length);
-       this.userArray = [];
-       for(let i =18; i < 21; i++) {
-        const latLongA= [ res[i].latitude, res[i].longitude];
-        let markerA = L.marker(latLongA).addTo(this.mymap);
-        markerA.bindPopup('<b>RescueCentre A</b>').openPopup();
-        console.log("latLong: "+latLongA)
 
-         //this.userArray.push(res[i].latitude);
-       }
-       console.log(this.userArray);
-    });
+
+console.log("This :",markersLayer);
+
+// markersLayer.addTo(this.mymap);
+//this.mymap.addLayer(markersLayer)
+//markersLayer.clearLayers();
+console.log("clear layers");
+
+//markersLayer.clearLayers();
+//this.mymap.removeLayer(markersLayer)
+console.log("after clear",markersLayer);
+//markersLayer.addTo(this.mymap);
+
+
+});
+markersLayer.addTo(this.mymap);
+console.log("outside the API");
+markersLayer.clearLayers();
+
+    
+  //   this.adminService.getUserList().subscribe(res => {
+  //     console.log("total entries: "+res.length);
+  //   //var markerB={[res.latitude,res.longitude]}
+  //  // console.log("MarkerB: "+markerB);
+  //      this.userArray = [];
+  //     //  this.mymap.removeLayer(this.mymap);
+  //      for(let i =0; i < res.length; i++) {
+  //       const latLongA= [ res[i].latitude, res[i].longitude];
+  //       var markerA = L.marker(latLongA).addTo(this.mymap);
+  //       //this.mymap.removeLayer();
+  //       const nameA= res[i].userName;
+  //       markerA.bindPopup('<b>RescueCentre A</b>'+nameA).openPopup();
+
+
+  //        //this.userArray.push(res[i].latitude);
+  //      }
+  //      console.log(this.userArray);
+  //   });
    // await delay(10000);
  // }
 
@@ -186,7 +352,9 @@ public changeSelectionOverviewExample(value){
 
 
 
-    }
+    };
+
+    
 
   watchPosition() {
     let desLat = 0;

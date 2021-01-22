@@ -18,7 +18,12 @@ export class UserComponent implements OnInit {
 
   public emergencyType;
   public userArray: any = [];
-  constructor(private adminService: AdminServiceService) { }
+  private latitude: any = [];
+  private longitude: any = [];
+  private markersLayer;
+  constructor(private adminService: AdminServiceService) {
+    this.markersLayer = new L.layerGroup();
+  }
 
 
 
@@ -54,9 +59,16 @@ public changeSelectionOverviewExample(value){
   ngOnInit() {
     this.generateMap();
     this.getDistance();
-    
   }
 
+
+  plotOnMap() : void {
+    // this.latitude = [];
+    // this.longitude = [];
+    this.markersLayer.clearLayers();
+    this.makeAnAPICall();
+    this.plotLatsOnMap();
+  }
   generateMap(){
 
 
@@ -121,23 +133,18 @@ public changeSelectionOverviewExample(value){
 //     const lonA = e.latlng.lng;
 
 //     console.log("You clicked the map at LAT: "+ latA+" and LONG: "+lonA );
-//         //Clear existing marker, 
+//         //Clear existing marker,
 
 //         // if (theMarker != undefined) {
 //         //       theMarker.remove() ;
 //         // };
 
 //     //Add a marker to show where you clicked.
-//       theMarker = L.marker([latA,lonA]).addTo(this.mymap); 
-     // theMarker.addLayer(this.mymap) 
+//       theMarker = L.marker([latA,lonA]).addTo(this.mymap);
+     // theMarker.addLayer(this.mymap)
 //});
 
-   
-
-
      // let marker = new L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
-
-     
 
      let marker =L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
       marker.bindPopup('<b>You</b>').openPopup();
@@ -217,13 +224,13 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
 //       _secondPoint = e.layerPoint;
 //       L.marker(_secondLatLng).addTo(this.map).bindPopup('Point B<br/>' + e.latlng + '<br/>' + e.layerPoint).openPopup();
 //     }
-  
+
 //     if (_firstLatLng && _secondLatLng) {
 //       // draw the line between points
 //       L.polyline([_firstLatLng, _secondLatLng], {
 //         color: 'red'
 //       }).addTo(this.mymap);
-  
+
 //       refreshDistanceAndLength();
 //     }
 //   })
@@ -248,19 +255,58 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
   };
 
 
+   async makeAnAPICall() {
+     console.log(this.latitude.length);
+     this.latitude = [];
+     this.longitude = [];
+      await this.adminService.getUserList().subscribe(res => {
+       for(let i =0; i < res.length; i++) {
+         this.latitude.push(res[i].latitude);
+         this.longitude.push(res[i].longitude);
+       }
+     });
+
+     console.log(this.latitude.length);
+  }
+
+  clearLayers(): void {
+
+     console.log("In clear function")
+       this.markersLayer.clearLayers();
+
+    console.log("after clear in clear function",this.markersLayer);
+
+      // this.mymap.removeLayer(this.markersLayer)
+
+  }
+
+   plotLatsOnMap(): void {
+     let marker;
+     for(let i = 0; i < this.latitude.length; i++) {
+       marker = L.marker([this.latitude[i], this.longitude[i]]).bindPopup('<b>RescueCentre A</b>');
+       marker.addTo(this.markersLayer);
+     }
+     // console.log("I am in for loop",this.markersLayer);
+     // console.log("I am outside for loop");
+     // console.log("This :",this.markersLayer);
+     // console.log("clear layers");
+     console.log("after clear in plot on map function",this.markersLayer);
+     this.markersLayer.addTo(this.mymap);
+     // console.log("outside the API");
+   }
 
    async happen(){
 
     //while (true){
-console.log("here we go again")
+    console.log("here we go again")
 
      // var map;
      // var markers = [];
-     // var locationCoor = []; 
+     // var locationCoor = [];
       //var marker;
       let markersLayer = new L.layerGroup(); //new L.FeatureGroup(); // NOTE: Layer is created here!
       console.log("Starting",markersLayer);
-     
+
 
     //  markersLayer.clearLayers();
 
@@ -274,7 +320,7 @@ console.log("here we go again")
 console.log("Layer is cleard",markersLayer);
 
 for(let i =0; i < res.length; i++) {
-  
+
 
   var latA = res[i].latitude;
   var lonA = res[i].longitude;
@@ -285,7 +331,7 @@ for(let i =0; i < res.length; i++) {
 
 //console.log("I am before for loop");
 marker.addTo(markersLayer);
-//markersLayer.addLayer(marker); 
+//markersLayer.addLayer(marker);
         console.log("I am in for loop",markersLayer);
 
 }
@@ -308,12 +354,13 @@ console.log("after clear",markersLayer);
 //markersLayer.addTo(this.mymap);
 
 
-});
+
 markersLayer.addTo(this.mymap);
 console.log("outside the API");
 markersLayer.clearLayers();
+      });
 
-    
+
   //   this.adminService.getUserList().subscribe(res => {
   //     console.log("total entries: "+res.length);
   //   //var markerB={[res.latitude,res.longitude]}
@@ -354,7 +401,7 @@ markersLayer.clearLayers();
 
     };
 
-    
+
 
   watchPosition() {
     let desLat = 0;

@@ -26,7 +26,7 @@ export class AdminServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getUserList(): Observable<any> {
+   getUserList(): Observable<any> {
     return this.http.get(this.getUserListURL);
   }
 

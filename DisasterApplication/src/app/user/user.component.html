@@ -53,7 +53,7 @@
     </div>
 
       <div class = "button2">
-        <button type="button" (click) = "happen()" class="btn btn-outline-secondary mr-2" placement="top" style="background-color:#b22222;color: linen;height: 45px;width: 150px;"  ngbPopover="Displaying all Rescue Centres near you" popoverTitle="Rescue Centres near you">
+        <button type="button" (click) = "plotOnMap()" class="btn btn-outline-secondary mr-2" placement="top" style="background-color:#b22222;color: linen;height: 45px;width: 150px;"  ngbPopover="Displaying all Rescue Centres near you" popoverTitle="Rescue Centres near you">
           Rescue Centers
         </button>
 
@@ -85,6 +85,10 @@
 
 
     </div>
+
+<div>
+  <button (click)="clearLayers()">Clear layers</button>
+</div>
 
 
     <!-- Copyright 2020 Google LLC. All Rights Reserved.

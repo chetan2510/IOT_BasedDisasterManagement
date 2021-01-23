@@ -7,11 +7,18 @@
   <th>User Name</th>
   <th>Latitude</th>
   <th>Longitude</th>
+  <th>emergencyType</th>
+  <th>emergencySeverity</th>
+  <th>victimHealthStatus</th>
+
 
   <tr *ngFor="let users of userArray">
     <td>{{users.userName}}</td>
     <td>{{users.latitude}}</td>
     <td>{{users.longitude}}</td>
+    <td>{{users.emergencyType}}</td>
+    <td>{{users.emergencySeverity}}</td>
+    <td>{{users.victimHealthStatus}}</td>
   </tr>
 </table>
 
@@ -63,6 +70,15 @@
   <label>Longitude:
     <input [(ngModel)]='longitude' placeholder="longitude"/>
   </label>
+  <label>Emergency Type:
+    <input [(ngModel)]='useremergencyType' placeholder="emergency type"/>
+  </label>
+  <label>Serverity:
+    <input [(ngModel)]='useremergencySeverity' placeholder="serverity"/>
+  </label>
+  <label>Health Status:
+    <input [(ngModel)]='uservictimHealthStatus' placeholder="health status"/>
+  </label>
 
   <button (click) = "addUser()"> Remove/Update User</button>
 </div>
@@ -80,11 +96,13 @@
   <th>Rescue Name</th>
   <th>Latitude</th>
   <th>Longitude</th>
+  <th>Status</th>
 
   <tr *ngFor="let rescuer of rescuerArray">
     <td>{{rescuer.rescuerName}}</td>
     <td>{{rescuer.latitude}}</td>
     <td>{{rescuer.longitude}}</td>
+    <td>{{rescuer.status}}</td>
   </tr>
 </table>
 
@@ -116,6 +134,12 @@
   </label>
   <label>Longitude:
     <input [(ngModel)]='rescuerlongitude' placeholder="longitude"/>
+  </label>
+  <label>Rescuer Status:
+    <input [(ngModel)]='rescuerstatus' placeholder="Rescuer Status"/>
+  </label>
+  <label>Password:
+    <input [(ngModel)]='rescuerpassword' placeholder="Password"/>
   </label>
 
   <button (click) = "addRescuer()"> Remove/Update Rescuer</button>

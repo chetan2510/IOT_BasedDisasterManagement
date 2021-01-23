@@ -16,24 +16,38 @@ export class AdminComponent implements OnInit {
   public userNameToBeDeleted = "";
   public rescuerNameToBeDeleted = "";
   public rescuerArray: any = [];
+
   user: User = {
     userName: "",
     latitude: "",
-    longitude: ""
+    longitude: "",
+    emergencyType: "",
+    emergencySeverity: "",
+    victimHealthStatus: ""
+
   };
 
   rescuer: Rescuer = {
     rescuerName: "",
     latitude: "",
-    longitude: ""
+    longitude: "",
+    status: "",
+    password: "",
   };
 
   public userNameToBeAdded;
+  public useremergencyType;
+  public useremergencySeverity;
+  public uservictimHealthStatus;
+
   public latitude;
   public longitude;
+
   public rescuerNameToBeAdded;
   public rescuerlatitude;
   public rescuerlongitude;
+  public rescuerstatus;
+  public rescuerpassword;
 
   constructor(private adminService: AdminServiceService) {  }
 
@@ -118,10 +132,13 @@ export class AdminComponent implements OnInit {
   }
 
   public addUser(): void {
-    if(this.userNameToBeAdded.trim() !== "" && this.latitude.trim() !== "" && this.longitude.trim() !== "") {
+    if(this.userNameToBeAdded.trim() !== "" || this.latitude.trim() !== "" || this.longitude.trim() !== "") {
       this.user.userName = this.userNameToBeAdded;
       this.user.latitude = this.latitude;
       this.user.longitude = this.longitude;
+      this.user.emergencySeverity = this.useremergencySeverity
+      this.user.emergencyType = this.useremergencyType
+      this.user.victimHealthStatus = this.uservictimHealthStatus
       this.adminService.addUser(this.user).subscribe(res => {
         alert(res.message);
         this.getUserList();
@@ -138,6 +155,9 @@ export class AdminComponent implements OnInit {
       this.rescuer.rescuerName = this.rescuerNameToBeAdded;
       this.rescuer.latitude = this.rescuerlatitude;
       this.rescuer.longitude = this.rescuerlongitude;
+      this.rescuer.status = this.rescuerstatus;
+      this.rescuer.password = this.rescuerpassword;
+
       this.adminService.addRescuer(this.rescuer).subscribe(res => {
         alert(res.message);
         this.getRescuerList();

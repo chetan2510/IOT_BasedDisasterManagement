@@ -257,15 +257,15 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
 
    async makeAnAPICall() {
      console.log(this.latitude.length);
-     this.latitude = [];
-     this.longitude = [];
       await this.adminService.getUserList().subscribe(res => {
+        this.latitude = [];
+        this.longitude = [];
        for(let i =0; i < res.length; i++) {
          this.latitude.push(res[i].latitude);
          this.longitude.push(res[i].longitude);
        }
      });
-
+     console.log("Checking the length of the array");
      console.log(this.latitude.length);
   }
 

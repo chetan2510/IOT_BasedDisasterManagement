@@ -85,11 +85,26 @@ public changeSelectionOverviewExample(value){
   }
 
 
-  plotOnMap() : void {
+  async plotOnMap()  {
+    
+    while (true) {
     this.markersLayer.clearLayers();
-    this.makeAnAPICall();
+    console.log("Before A");
+    await   this.makeAnAPICall();
+    console.log("After C")
     this.plotLatsOnMap();
+    console.log("Done",this.latitude.length);
+   
+    
+    //console.log("")
+
+    await this.delay(5000);
+    
   }
+  
+  
+  }
+
   generateMap(){
 
     if (!navigator.geolocation) {
@@ -178,19 +193,22 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
     this.watchPosition();
   }
 
-   async makeAnAPICall() {
-     console.log(this.latitude.length);
-      await this.adminService.getUserList().subscribe(res => {
-        this.latitude = [];
-        this.longitude = [];
-       for(let i =0; i < res.length; i++) {
-         this.latitude.push(res[i].latitude);
-         this.longitude.push(res[i].longitude);
-       }
-     });
-     console.log("Checking the length of the array");
-     console.log(this.latitude.length);
-  }
+  async makeAnAPICall() {
+    
+    this.latitude = [];
+    this.longitude = [];
+    console.log("A",this.latitude.length);
+    //this.delay(2000);
+    const res = await this.adminService.getUserList().toPromise();
+  console.log("B",res.length)
+      for(let i =0; i < res.length; i++) {
+        this.latitude.push(res[i].latitude);
+        this.longitude.push(res[i].longitude);
+      };
+      
+    console.log(" C ",this.latitude.length);
+ } 
+
 
    plotLatsOnMap(): void {
      let marker;
@@ -198,7 +216,7 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
        marker = L.marker([this.latitude[i], this.longitude[i]]).bindPopup('<b>RescueCentre A</b>');
        marker.addTo(this.markersLayer);
      }
-     console.log("after clear in plot on map function",this.markersLayer);
+    // console.log("after clear in plot on map function",this.markersLayer);
      this.markersLayer.addTo(this.mymap);
    }
 
@@ -289,7 +307,7 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
 //    // await delay(10000);
 //  // }
 //
-//       //const latLongA = [50.1200336+0.00619366, 8.6527636];
+//       //const latLongA = [ +0.00619366, 8.6527636];
 //
 //     //  const latLongB = [50.161064818858684, 8.748550415039064];
 //
@@ -333,17 +351,22 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
     );
   }
 
-  public getUserNotification(): void {
-    this.adminService.getUserNotification().subscribe(res => {
-      if( res.notification === "") {
+  public async getUserNotification() {
+    while (true){
+    const res= await this.adminService.getUserNotification().toPromise();//.subscribe(res => {
+    console.log("Response",res);  
+    if( res.notification === "") {
         alert("Message: No notification avaialable")
       } else {
         alert("Message: "+res.notificationMessage);
-      }
-      this.userNotification = res.notification;
-    },(error: HttpErrorResponse) => {
-      alert(error.error.message);
-    });
+      //}
+      //this.userNotification = res.notification;
+    } //
+    // ,(error: HttpErrorResponse) => {
+    //   alert(error.error.message);
+    // });
+   await this.delay(6000);
+  }
   }
 
   delay(ms: number) {

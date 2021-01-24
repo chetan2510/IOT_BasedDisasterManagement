@@ -18,6 +18,10 @@ export class RescuerComponent implements OnInit {
   public isSignInSuccessfull = false;
   public latitude;
   public longitude;
+  public userlatitude;
+  public userlongitude;
+  public isTakingBreak = false;
+  public users;
   public mymap: any;
   private markersLayer;
   public rescuers;
@@ -34,10 +38,6 @@ export class RescuerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.rescuerUsername = "Rescuer1";
-    this.password = "qwertyuiop";
-    this.signIn();
-    this.generateMap();
   }
 
   public signIn(): void {
@@ -46,7 +46,7 @@ export class RescuerComponent implements OnInit {
       alert("Fill all the fields");
       return;
     }
-
+    this.generateMap();
     this.rescuer.password = this.password;
     this.rescuer.status = "Active";
     this.rescuer.rescuerName = this.rescuerUsername;
@@ -73,11 +73,13 @@ export class RescuerComponent implements OnInit {
   }
 
   public startRescuing(): void {
+    this.updateStatusOfRescuer("Active");
+    this.isTakingBreak = true;
    this.plotOnMap();
   }
 
   async plotOnMap()  {
-    while (true) {
+    while (this.isTakingBreak) {
       this.markersLayer.clearLayers();
       await   this.makeAnAPICall();
       this.plotLatsOnMap();
@@ -89,24 +91,55 @@ export class RescuerComponent implements OnInit {
 
   async makeAnAPICall() {
 
+this.userlatitude = [];
+this.userlongitude = [];
+this.users = [];
     this.latitude = [];
     this.longitude = [];
     this.rescuers = [];
     const res = await this.adminService.getAllRescuers().toPromise();
     for(let i =0; i < res.length; i++) {
-      this.latitude.push(res[i].latitude);
-      this.longitude.push(res[i].longitude);
-      this.rescuers.push(res[i].rescuerName);
+      if(res[i].status !== "Inactive") {
+        this.latitude.push(res[i].latitude);
+        this.longitude.push(res[i].longitude);
+        this.rescuers.push(res[i].rescuerName);
+      }
+    };
+
+    const resUsers = await this.adminService.getUserList().toPromise();
+    for(let i =0; i < resUsers.length; i++) {
+      this.userlatitude.push(resUsers[i].latitude);
+      this.userlongitude.push(resUsers[i].longitude);
+      this.users.push(resUsers[i].userName);
     };
   }
 
   plotLatsOnMap(): void {
     let marker;
     for(let i = 0; i < this.latitude.length; i++) {
-      marker = L.marker([this.latitude[i], this.longitude[i]]).bindPopup('<b>' +this.rescuers[i] +'</b>');
+      var greenIcon = L.icon({
+        iconUrl: 'assets/img/red_shadow.png',
+        // iconRetinaUrl: 'img/marker-icon-2x-black.png',
+        iconSize:     [25, 41], // size of the icon
+
+      });
+      marker = L.marker([this.latitude[i], this.longitude[i]], {icon: greenIcon}).bindPopup('<b>' +this.rescuers[i] +'</b>');
       marker.addTo(this.markersLayer);
     }
+
+    for(let i = 0; i < this.userlatitude.length; i++) {
+      // var greenIcon = L.icon({
+      //   iconUrl: 'assets/img/bl.png',
+      //   // iconRetinaUrl: 'img/marker-icon-2x-black.png',
+      //   iconSize:     [25, 41], // size of the icon
+      //
+      // });
+      marker = L.marker([this.userlatitude[i], this.userlongitude[i]]).bindPopup('<b>' +this.users[i] +'</b>');
+      marker.addTo(this.markersLayer);
+    }
+
     this.markersLayer.addTo(this.mymap);
+
   }
 
   public async getRescuerNotification() {
@@ -217,6 +250,20 @@ export class RescuerComponent implements OnInit {
 
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  public stopRescuing() : void {
+    this.isTakingBreak = false;
+    this.updateStatusOfRescuer("Inactive");
+    // make an api call to make him inactive
+  }
+
+
+  public updateStatusOfRescuer(status: string): void {
+    this.adminService.updateRescuerStatus(this.rescuerUsername, status).subscribe(res => {
+      alert(res.message);
+      }, (error: HttpErrorResponse) => {
+      alert(error.error.message);});
   }
 
 }

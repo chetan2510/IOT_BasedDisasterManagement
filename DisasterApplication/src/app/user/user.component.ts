@@ -163,7 +163,6 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
         radius: 1500
 
     }).addTo(this.mymap);
-
       let popup = L.popup()
         .setLatLng(latLong)
         .setContent('You are in Disaster Zone')
@@ -173,14 +172,13 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
   }
 
   async makeAnAPICall() {
-
     this.latitude = [];
     this.longitude = [];
     const res = await this.adminService.getUserList().toPromise();
       for(let i =0; i < res.length; i++) {
-        this.latitude.push(res[i].latitude);
-        this.longitude.push(res[i].longitude);
-        this.resucerName.push(res[i].userName);
+          this.latitude.push(res[i].latitude);
+          this.longitude.push(res[i].longitude);
+          this.resucerName.push(res[i].userName);
       };
  }
 

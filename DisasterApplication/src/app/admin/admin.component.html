@@ -3,13 +3,15 @@
 </div>
 
 <!--  <div *ngFor="let qwe of users">-->
-<table *ngIf="userArray">
+<table class="table table-striped" *ngIf="userArray">
+  <thead>
   <th>User Name</th>
   <th>Latitude</th>
   <th>Longitude</th>
   <th>emergencyType</th>
   <th>emergencySeverity</th>
   <th>victimHealthStatus</th>
+  </thead>
 
 
   <tr *ngFor="let users of userArray">
@@ -29,7 +31,7 @@
     Add Mutiple Users
   </h2>
   <div>
-    <button (click) = "addMultipleUser()"> Add Multiple Users</button>
+    <button class="btn btn-primary" (click) = "addMultipleUser()"> Add Multiple Users</button>
   </div>
 
   <br>
@@ -49,10 +51,10 @@
 </h2>
   <div>
     <label>UserName:
-      <input [(ngModel)]='userNameToBeDeleted' placeholder="User Name"/>
+      <input class="form-control" [(ngModel)]='userNameToBeDeleted' placeholder="User Name"/>
     </label>
 
-    <button (click) = "deleteUser()"> Remove User</button>
+    <button class="btn btn-danger" (click) = "deleteUser()"> Remove User</button>
   </div>
 
 </div>

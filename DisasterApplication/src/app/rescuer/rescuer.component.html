@@ -27,14 +27,19 @@
 
     <div id="title">
 
-      <h2> Showing all the Rescuers </h2>
+      <h2> Welcome {{rescuerUsername}} </h2>
 
     </div>
 
       <div class="button1">
-        <button type="button" (click)="startRescuing()" class="btn btn-outline-secondary mr-2" placement="top"
+        <button *ngIf="!isTakingBreak" type="button" (click)="startRescuing()" class="btn btn-outline-secondary mr-2" placement="top"
                 style="background-color:#b22222;color: linen;height: 45px;width: 150px;">
          Start Rescuing
+        </button>
+
+        <button *ngIf="isTakingBreak" type="button" (click)="stopRescuing()" class="btn btn-outline-secondary mr-2" placement="top"
+                style="background-color:#b22222;color: linen;height: 45px;width: 150px;">
+          Take Break
         </button>
       </div>
     </div>

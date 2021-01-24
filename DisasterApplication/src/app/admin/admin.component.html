@@ -141,8 +141,19 @@
   <label>Password:
     <input [(ngModel)]='rescuerpassword' placeholder="Password"/>
   </label>
-
   <button (click) = "addRescuer()"> Remove/Update Rescuer</button>
+</div>
+
+<div>
+  <h2>Update Rescuer Status</h2>
+  <label>Rescuer Name:
+    <input [(ngModel)]='rescuerNameForStatus' placeholder="Rescuer Name"/>
+  </label>
+  <label>Rescuer Status:
+    <input [(ngModel)]='rescuerstatusToUpdate' placeholder="Rescuer Status"/>
+  </label>
+  <button (click) = "UpdateRescuerStatus()"> Update Rescuer Status</button>
+
 </div>
 
 
@@ -175,4 +186,18 @@
   <button (click) = "sendNotificationToUser()"> Send Notification to User</button>
   <button (click) = "sendNotificationToRescuer()"> Send Notification to Rescuer</button>
 </div>
+
+<div>
+  <button (click) = "getAllNotification()">Get All Notifications</button>
+</div>
+<table *ngIf="notificationMessages">
+  <th>Notification Message</th>
+  <th>Receiver</th>
+
+  <tr *ngFor="let notification of notificationMessages">
+    <td>{{notification.notificationMessage}}</td>
+    <td>{{notification.receiver}}</td>
+  </tr>
+</table>
+
 

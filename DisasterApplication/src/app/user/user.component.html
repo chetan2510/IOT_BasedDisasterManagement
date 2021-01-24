@@ -1,35 +1,29 @@
-
 <div id="main_container">
 
 
-    <div id="title">
+  <div id="title">
 
-      <h2> Welcome To Disaster Managment Application </h2>
+    <h2> Relax, Rescuers are on the way </h2>
 
-    </div>
+  </div>
 
+  <div id="map"></div>
 
-
-    <div id="map"></div>
-
-    <div id="dropdown">
-
-      <h5> User Name</h5>
-      <input [(ngModel)]='userNameToBeAdded' placeholder="Rescuer Name"/>
-    <h5>Emergency Type </h5>
+  <div id="dropdown">
+    <h4 style="color: cornflowerblue">Fill the form for help</h4>
+    <input [(ngModel)]='userNameToBeAdded' placeholder="Rescuer Name"/>
+    <br>
     <mat-form-field appearance="fill">
-      <mat-label>  Select Type </mat-label>
+      <mat-label> Emergency Type</mat-label>
       <mat-select (selectionChange)="changeSelectionOverviewExample($event.value)">
-        <mat-option *ngFor="let food of foods" [value]="food.value" >
+        <mat-option *ngFor="let food of foods" [value]="food.value">
           {{food.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-
-    <h5> Emergency Severity  </h5>
-    <mat-form-field appearance="fill" >
-      <mat-label >Select Level</mat-label>
+    <mat-form-field appearance="fill">
+      <mat-label>Severity Level</mat-label>
       <mat-select (selectionChange)="changeSelectionSeverity($event.value)">
         <mat-option *ngFor="let item of items" [value]="item.value">
           {{item.viewValue}}
@@ -37,9 +31,8 @@
       </mat-select>
     </mat-form-field>
 
-    <h5> Victim Health Status </h5>
     <mat-form-field appearance="fill">
-      <mat-label>Select Status</mat-label>
+      <mat-label>Health Status</mat-label>
       <mat-select (selectionChange)="changeSelectionStatus($event.value)">
         <mat-option *ngFor="let product of products" [value]="product.value">
           {{product.viewValue}}
@@ -48,44 +41,31 @@
     </mat-form-field>
 
 
-    <div class = "button1">
-      <button type="button" (click)="sendUserDataToBackend()" class="btn btn-outline-secondary mr-2" placement="top" style="background-color:#b22222;color: linen;height: 45px;width: 150px;"  ngbPopover="Please stay on the page for Response from the Rescue Team" popoverTitle="Help request sent">
+    <div class="button1">
+      <button type="button" (click)="sendUserDataToBackend()" class="btn btn-outline-secondary mr-2" placement="top"
+              style="background-color:#b22222;color: linen;height: 45px;width: 150px;">
         Ask for help
       </button>
     </div>
 
-      <div class = "button2">
-        <button type="button" (click) = "plotOnMap()" class="btn btn-outline-secondary mr-2" placement="top" style="background-color:#b22222;color: linen;height: 45px;width: 150px;"  ngbPopover="Displaying all Rescue Centres near you" popoverTitle="Rescue Centres near you">
-          Show Nearby Victims
-        </button>
-
-      </div>
-
-    <div id="button3">
-
-       <app-buttons></app-buttons>
-    </div>
-
-      <br>
-      <br>
-      <div>
-        <button (click)="getUserNotification()">Show Notification</button>
-      </div>
-
-
-      <div *ngIf="userNotification">
-        <h2>{{userNotification}}</h2>
-      </div>
-
-     </div>
-
+    <div style="padding-top: 30px; padding-left: 18px">
+      <button *ngIf="!ifClicked" type="button" (click)="plotOnMap()" class="btn btn-primary"
+              ngbPopover="Displaying all Rescue Centres near you" popoverTitle="Rescue Centres near you">
+        Show Nearby Victims
+      </button>
 
     </div>
 
 
-    <!-- Copyright 2020 Google LLC. All Rights Reserved.
+  </div>
+
+</div>
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
         Use of this source code is governed by an MIT-style license that
-        can be found in the LICENSE file at http://angular.io/license -->
+        can be found in the LICENSE file at http://angular.io/license
+-->
 
 
-  <!-- <router-outlet></router-outlet> -->
+<!-- <router-outlet></router-outlet> -->

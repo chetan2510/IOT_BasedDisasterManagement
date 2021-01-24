@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   public userNameToBeDeleted = "";
   public rescuerNameToBeDeleted = "";
   public rescuerArray: any = [];
+  public notificationMessages: any = [];
 
   user: User = {
     userName: "",
@@ -48,6 +49,8 @@ export class AdminComponent implements OnInit {
   public rescuerlongitude;
   public rescuerstatus;
   public rescuerpassword;
+  public rescuerNameForStatus;
+  public rescuerstatusToUpdate;
 
   constructor(private adminService: AdminServiceService) {  }
 
@@ -185,6 +188,7 @@ export class AdminComponent implements OnInit {
   public sendNotificationToUser(): void {
       this.adminService.sendNotificationToUser(this.notificationMessage).subscribe(res => {
         alert(res.notificationMessage);
+        this.getAllNotification();
       },(error: HttpErrorResponse) => {
         alert(error.error.message);
       });
@@ -194,8 +198,31 @@ export class AdminComponent implements OnInit {
   public sendNotificationToRescuer(): void {
       this.adminService.sendNotificationToRescuer(this.notificationMessage).subscribe(res => {
         alert(res.notificationMessage);
+        this.getAllNotification();
       },(error: HttpErrorResponse) => {
         alert(error.error.message);
       });
   }
+
+  public getAllNotification() : void {
+    this.adminService.getAllNotificationMessage().subscribe(res => {
+      console.log(res.length);
+      this.notificationMessages = [];
+      for(let i =0; i < res.length; i++) {
+        this.notificationMessages.push(res[i]);
+      }
+    } , (error: HttpErrorResponse) => {
+  alert(error.error.message);
+    });
+  }
+
+  public UpdateRescuerStatus(): void {
+    this.adminService.updateRescuerStatus(this.rescuerNameForStatus, this.rescuerstatusToUpdate).subscribe(res => {
+      alert(res.message);
+      this.getRescuerList();
+    }, (error: HttpErrorResponse) => {
+      alert(error.error.message);
+    });
+  }
+
 }

@@ -6,18 +6,21 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserComponent } from './user/user.component';
 import {MatSelectModule} from '@angular/material/select';
-import { ButtonsComponent } from './user/buttons/buttons.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminComponent } from './admin/admin.component';
 import {HttpClientModule} from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
+import { RescuerComponent } from './rescuer/rescuer.component';
+import {AngularMaterialModule} from './angular-material.module';
+import { RescuerSignUpComponent } from './rescuer-sign-up/rescuer-sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    ButtonsComponent,
-    AdminComponent
+    AdminComponent,
+    RescuerComponent,
+    RescuerSignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

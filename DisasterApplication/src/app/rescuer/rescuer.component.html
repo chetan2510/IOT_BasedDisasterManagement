@@ -1,0 +1,44 @@
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center" *ngIf = "!isSignInSuccessfull">
+
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Sign In</mat-card-title>
+    </mat-card-header>
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]='rescuerUsername' matInput placeholder="Rescuer Name">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]='password' matInput placeholder="Password" type="password">
+        </mat-form-field>
+      </mat-card-content>
+      <button (click)="signIn()" mat-stroked-button color="accent" class="btn-block">Sign-in</button>
+      <button (click)="signUp()" mat-stroked-button color="accent" class="btn-block">Sign-up</button>
+  </mat-card>
+
+</div>
+
+
+<div *ngIf = "isSignInSuccessfull">
+
+  <div id="main_container" style="alignment: center">
+
+
+    <div id="title">
+
+      <h2> Showing all the Rescuers </h2>
+
+    </div>
+
+      <div class="button1">
+        <button type="button" (click)="startRescuing()" class="btn btn-outline-secondary mr-2" placement="top"
+                style="background-color:#b22222;color: linen;height: 45px;width: 150px;">
+         Start Rescuing
+        </button>
+      </div>
+    </div>
+
+  <div id="map"></div>
+
+</div>

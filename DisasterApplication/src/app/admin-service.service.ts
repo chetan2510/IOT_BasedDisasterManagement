@@ -17,12 +17,16 @@ export class AdminServiceService {
   private addUserURL = "http://localhost:9902/user/adduser";
   private addMultipleRescuersURL = "http://localhost:9902/rescuer/addmultiplerescuers";
   private clearAllRescuerURL = "http://localhost:9902/rescuer/clearallrescuers";
-  private addRescuerURL = "http://localhost:9902/rescuer/addrescuer";
+  private addRescuerURL = "http://localhost:9902/rescuer/signuprescuer";
   private deleteRescuerURL = "http://localhost:9902/rescuer/deleterescuer";
   private sendNotificationToUserURL = "http://localhost:9902/admin/sendNotificationtousers";
   private sendNotificationToRescuerURL = "http://localhost:9902/admin/sendnotificationtorescuers";
   private getUserNotificationURL = "http://localhost:9902/user/getusernotification";
   private getRescuerNotificationURL = "http://localhost:9902/rescuer/getrescuernotification";
+  private getAllNotificationsURL = "http://localhost:9902/admin/getallnotifications";
+  private updateRescuerStatusURL = "http://localhost:9902/rescuer/updaterescuerstatus";
+  private rescuerLoginURL = "http://localhost:9902/rescuer/loginrescuer";
+
 
   constructor(private http: HttpClient) { }
 
@@ -62,10 +66,6 @@ export class AdminServiceService {
     return this.http.delete(this.deleteRescuerURL+ "?rescuerName=" +rescuerName);
   }
 
-  addRescuer(rescuer: Rescuer) : Observable<any> {
-    return this.http.post(this.addRescuerURL, rescuer);
-  }
-
   sendNotificationToUser(notification: string) : Observable<any> {
     return this.http.post(this.sendNotificationToUserURL + "?notification=" + notification, null);
   }
@@ -80,6 +80,22 @@ export class AdminServiceService {
 
   getRescuerNotification() : Observable<any> {
     return this.http.get(this.getRescuerNotificationURL);
+  }
+
+  getAllNotificationMessage(): Observable<any> {
+    return this.http.get(this.getAllNotificationsURL);
+  }
+
+  updateRescuerStatus(rescuerName: string, status: string ): Observable<any> {
+    return this.http.get(this.updateRescuerStatusURL + "?status="+status + "&rescuerName="+rescuerName);
+  }
+
+  loginRescuer(rescuer: Rescuer): Observable<any> {
+    return this.http.post(this.rescuerLoginURL, rescuer);
+  }
+
+  addRescuer(rescuer: Rescuer) : Observable<any> {
+    return this.http.post(this.addRescuerURL, rescuer);
   }
 
 }

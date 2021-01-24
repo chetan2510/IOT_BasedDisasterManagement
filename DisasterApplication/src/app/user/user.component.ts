@@ -16,15 +16,17 @@ export class UserComponent implements OnInit {
   public mymap: any;
   public title = 'Covorsicht';
   private userNotification;
+  public ifClicked = false;
 
 
-  public userNameToBeAdded;
-  public useremergencyType;
-  public useremergencySeverity;
-  public uservictimHealthStatus;
+  public userNameToBeAdded = "";
+  public useremergencyType = "";
+  public useremergencySeverity = "";
+  public uservictimHealthStatus = "";
 
   public latitude;
   public longitude;
+  public resucerName;
 
   public userArray: any = [];
   private markersLayer;
@@ -86,23 +88,17 @@ public changeSelectionOverviewExample(value){
 
 
   async plotOnMap()  {
-    
+    this.ifClicked = true;
     while (true) {
     this.markersLayer.clearLayers();
-    console.log("Before A");
     await   this.makeAnAPICall();
-    console.log("After C")
     this.plotLatsOnMap();
-    console.log("Done",this.latitude.length);
-   
-    
-    //console.log("")
-
+    await this.getUserNotification();
     await this.delay(5000);
-    
+
   }
-  
-  
+
+
   }
 
   generateMap(){
@@ -136,29 +132,12 @@ public changeSelectionOverviewExample(value){
         }
       ).addTo(this.mymap);
 
-  //     var redIcon = L.icon.Default({
-  //      iconUrl: '/img/marker-icon-2x-black.png/',
-  //      shadowUrl: '/img/marker-icon-black.png/',
-  //       iconSize: [38, 95],
-  //       iconAnchor: [22, 94],
-  //       popupAnchor: [-3, -76],
-  //       shadowSize: [68, 95],
-  //       shadowAnchor: [22, 94]
-  //  });
-
-
   var greenIcon = L.icon({
     iconUrl: 'assets/img/red_shadow.png',
    // iconRetinaUrl: 'img/marker-icon-2x-black.png',
     iconSize:     [25, 41], // size of the icon
-   // shadowSize:   [50, 64], // size of the shadow
-  //  iconAnchor:   [30, 48], // point of the icon which will correspond to marker's location
-  //  shadowAnchor: [4, 62],  // the same for the shadow
-  //  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+
 });
-
-
-     // let marker = new L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
 
      let marker =L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
       marker.bindPopup('<b>You</b>').openPopup();
@@ -171,8 +150,8 @@ var from = markerFrom.getLatLng();
 var to = markerTo.getLatLng();
 markerFrom.bindPopup('pointA ' + (from).toString());
 markerTo.bindPopup('pointB ' + (to).toString());
-this.mymap.addLayer(markerTo);
-this.mymap.addLayer(markerFrom);
+// this.mymap.addLayer(markerTo);
+// this.mymap.addLayer(markerFrom);
 var disatance = from.distanceTo(to)
 
 console.log("distance from point a to point B",from.distanceTo(to).toString(),"m");
@@ -194,139 +173,26 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
   }
 
   async makeAnAPICall() {
-    
+
     this.latitude = [];
     this.longitude = [];
-    console.log("A",this.latitude.length);
-    //this.delay(2000);
     const res = await this.adminService.getUserList().toPromise();
-  console.log("B",res.length)
       for(let i =0; i < res.length; i++) {
         this.latitude.push(res[i].latitude);
         this.longitude.push(res[i].longitude);
+        this.resucerName.push(res[i].userName);
       };
-      
-    console.log(" C ",this.latitude.length);
- } 
+ }
 
 
    plotLatsOnMap(): void {
      let marker;
      for(let i = 0; i < this.latitude.length; i++) {
-       marker = L.marker([this.latitude[i], this.longitude[i]]).bindPopup('<b>RescueCentre A</b>');
+       marker = L.marker([this.latitude[i], this.longitude[i]]).bindPopup('<b>' + this.resucerName[i]+'</b>');
        marker.addTo(this.markersLayer);
      }
-    // console.log("after clear in plot on map function",this.markersLayer);
      this.markersLayer.addTo(this.mymap);
    }
-
-//    async happen(){
-//
-//     //while (true){
-//     console.log("here we go again")
-//
-//      // var map;
-//      // var markers = [];
-//      // var locationCoor = [];
-//       //var marker;
-//       let markersLayer = new L.layerGroup(); //new L.FeatureGroup(); // NOTE: Layer is created here!
-//       console.log("Starting",markersLayer);
-//
-//
-//     //  markersLayer.clearLayers();
-//
-//       this.adminService.getUserList().subscribe(res => {
-//         console.log("total entries: "+res.length);
-// // NOTE: The first thing we do here is clear the markers from the layer.
-//
-// //this.mymap.removeLayer(markersLayer)
-// //console.log("Starting ahead",markersLayer)
-// //markersLayer.clearLayers();
-// console.log("Layer is cleard",markersLayer);
-//
-// for(let i =0; i < res.length; i++) {
-//
-//
-//   var latA = res[i].latitude;
-//   var lonA = res[i].longitude;
-//  // locationCoor[i]=[latA,lonA];
-//
-//   let marker = L.marker([latA, lonA]).bindPopup('<b>RescueCentre A</b>');
-//   console.log("Marker value: ",marker)
-//
-// //console.log("I am before for loop");
-// marker.addTo(markersLayer);
-// //markersLayer.addLayer(marker);
-//         console.log("I am in for loop",markersLayer);
-//
-// }
-// console.log("I am outside for loop");
-//
-//
-//
-//
-//
-// console.log("This :",markersLayer);
-//
-// // markersLayer.addTo(this.mymap);
-// //this.mymap.addLayer(markersLayer)
-// //markersLayer.clearLayers();
-// console.log("clear layers");
-//
-// //markersLayer.clearLayers();
-// //this.mymap.removeLayer(markersLayer)
-// console.log("after clear",markersLayer);
-// //markersLayer.addTo(this.mymap);
-//
-//
-//
-// markersLayer.addTo(this.mymap);
-// console.log("outside the API");
-// markersLayer.clearLayers();
-//       });
-//
-//
-//   //   this.adminService.getUserList().subscribe(res => {
-//   //     console.log("total entries: "+res.length);
-//   //   //var markerB={[res.latitude,res.longitude]}
-//   //  // console.log("MarkerB: "+markerB);
-//   //      this.userArray = [];
-//   //     //  this.mymap.removeLayer(this.mymap);
-//   //      for(let i =0; i < res.length; i++) {
-//   //       const latLongA= [ res[i].latitude, res[i].longitude];
-//   //       var markerA = L.marker(latLongA).addTo(this.mymap);
-//   //       //this.mymap.removeLayer();
-//   //       const nameA= res[i].userName;
-//   //       markerA.bindPopup('<b>RescueCentre A</b>'+nameA).openPopup();
-//
-//
-//   //        //this.userArray.push(res[i].latitude);
-//   //      }
-//   //      console.log(this.userArray);
-//   //   });
-//    // await delay(10000);
-//  // }
-//
-//       //const latLongA = [ +0.00619366, 8.6527636];
-//
-//     //  const latLongB = [50.161064818858684, 8.748550415039064];
-//
-//       //const latLongC = [50.12982265022155, 8.75267028808594];
-//
-//     //  let markerA = L.marker(latLongA).addTo(this.mymap);
-//     //  markerA.bindPopup('<b>RescueCentre A</b>').openPopup();
-//
-//      // let markerB = L.marker(latLongB).addTo(this.mymap);
-//      // markerB.bindPopup('<b>RescueCentre B</b>').openPopup();
-//
-//      // let markerC = L.marker(latLongC).addTo(this.mymap);
-//      // markerC.bindPopup('<b>RescueCentre C</b>').openPopup();
-//
-//
-//
-//     };
-
-
 
   watchPosition() {
     let desLat = 0;
@@ -352,21 +218,14 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
   }
 
   public async getUserNotification() {
-    while (true){
-    const res= await this.adminService.getUserNotification().toPromise();//.subscribe(res => {
-    console.log("Response",res);  
-    if( res.notification === "") {
-        alert("Message: No notification avaialable")
-      } else {
-        alert("Message: "+res.notificationMessage);
-      //}
-      //this.userNotification = res.notification;
-    } //
+    const res= await this.adminService.getUserNotification().toPromise();
+    if( res.notificationMessage !== "undefined" && res.notificationMessage !== "") {
+      alert("Message from admin: "+res.notificationMessage);
+      }
     // ,(error: HttpErrorResponse) => {
     //   alert(error.error.message);
     // });
    await this.delay(6000);
-  }
   }
 
   delay(ms: number) {
@@ -374,7 +233,7 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
   }
 
   public sendUserDataToBackend() : void{
-      if(this.userNameToBeAdded.trim() !== "" || this.latitude.trim() !== "" || this.longitude.trim() !== "") {
+      if(this.userNameToBeAdded !== "" && this.uservictimHealthStatus !== "" && this.useremergencyType !== ""  && this.useremergencySeverity !== "") {
       this.user.userName = this.userNameToBeAdded;
       this.user.latitude = this.latitude;
       this.user.longitude = this.longitude;
@@ -386,16 +245,12 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
       }, (error: HttpErrorResponse) => {
         alert(error.error.message);});
     } else {
-      alert("Please fill all the fields");
+      alert("Please fill all the fields before asking for help");
     }
-
-      // this.delay(2000);
-
-      // while(true) {
-      //   this.plotOnMap();
-      //   this.delay(5000);
-      // }
   }
+
+
+
 }
 
 

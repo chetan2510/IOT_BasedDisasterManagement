@@ -6,25 +6,25 @@
     margin: 0%;
     margin: 7px;
     /* background-color:grey ; */
-  
+
   }
 
 
 
-  
+
   #title{
-    
+
     width: 1340px;
     background-color:firebrick;
     text-align: center;
     height: 58px;
-    padding: 7px; 
-    color: antiquewhite; 
-    
-  
+    padding: 7px;
+    color: antiquewhite;
+
+
   }
-  
-  
+
+
   #map {
     height: 583px;
     width: 1000px;
@@ -32,9 +32,9 @@
     right: 1px;
     /* background-image: url(Disaster.png); */
   }
-  
+
   #dropdown {
-  
+
     position: absolute;
     left: 20px;
     height: 550px;
@@ -42,40 +42,40 @@
     margin-left: -8px;
     padding-left: 20px;
     padding-top: 15px;
-  
+
   }
-  
-  
+
+
   .button1{
-  
+
     padding-left: 27px;
     padding-top: 5px;
-  
-  
+
+
   }
-  
-  
+
+
   .button2{
-  
     padding-top: 20px;
-    padding-left: 27px;
-  
-  
+    padding-left: 40px;
+    width: 200px;
+    height: 45px;
+    color:#b22222;
   }
-  
+
   /* .button3{
     padding-top: 25px;
     padding-left: 27px;
   }
    */
-  
+
   /* .leaflet-marker-icon.huechange{
     filter: hue-rotate(200deg);
   } */
 
   img.huechange { filter: hue-rotate(120deg); }
-  
-  /* .huechange { 
+
+  /* .huechange {
     filter: hue-rotate(200deg); */
   /* background-color: black;
   color:black;
@@ -92,13 +92,12 @@ background-image: url(http://chart.apis.google.com/chart?chst=d_map_pin_letter&c
 }  */
 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+

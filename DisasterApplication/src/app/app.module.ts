@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { RescuerComponent } from './rescuer/rescuer.component';
 import {AngularMaterialModule} from './angular-material.module';
 import { RescuerSignUpComponent } from './rescuer-sign-up/rescuer-sign-up.component';
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { RescuerSignUpComponent } from './rescuer-sign-up/rescuer-sign-up.compon
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    MatTableModule
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

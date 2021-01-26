@@ -3,6 +3,7 @@ import {AdminServiceService} from "../admin-service.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {User} from "../User";
 import {Rescuer} from "../Rescuer";
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-admin',
@@ -27,6 +28,8 @@ export class AdminComponent implements OnInit {
     victimHealthStatus: ""
 
   };
+
+
 
   rescuer: Rescuer = {
     rescuerName: "",
@@ -67,6 +70,11 @@ export class AdminComponent implements OnInit {
           this.userArray.push(res[i]);
         }
       });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.userArray.filter = filterValue.trim().toLowerCase();
   }
 
   public addMultipleUser(): void {

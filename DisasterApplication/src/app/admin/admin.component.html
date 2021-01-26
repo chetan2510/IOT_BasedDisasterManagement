@@ -1,10 +1,72 @@
-<div>
-  <h1>Users component active</h1>
-</div>
+
+<div id="mainContainer">
+
+
+<nav class="navbar navbar-expand-sm navbark-dark" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="admin"> <h4>Admin</h4></a>
+<ul class="navbar-nav">
+  <li class="nav-item">
+    <button class="m-1 btn btn-light btn-outline-primary" Button
+    label="UsersAction"
+    (click)="UsersAction=true; RescuersAction=false; NotificationAction=false;">
+    USER ACTIONS
+
+  </button>
+  </li>
+  <li class="nav-item">
+    <button class="m-1 btn btn-light btn-outline-danger" Button
+    label="RescuersAction"
+    (click)="UsersAction=false; RescuersAction=true; NotificationAction=false;">
+    RESCUER ACTIONS
+  </button>
+  </li>
+<li class="nav-item">
+  <button class="m-1 btn btn-light btn-outline-secondary" Button
+  label="NotificationAction"
+  (click)="UsersAction=false; RescuersAction=flase; NotificationAction=true;">
+  NOTIFICATIONS
+</button>
+</li>
+</ul>
+</nav>
+
+
+
 
 <!--  <div *ngFor="let qwe of users">-->
-<table class="table table-striped" *ngIf="userArray">
-  <thead>
+  
+<div id="UserActionsContainer" *ngIf="UsersAction" >
+
+  <br>
+  <div style=color:blue >
+    <h1>Users component active</h1>
+  </div>
+  <br>
+
+  
+    <div id="AddMultipleUsers">
+    <h3>
+      Add Mutiple Users
+    </h3>
+    
+      <button class="btn btn-primary" (click) = "addMultipleUser()"> Add Multiple Users</button>
+    
+    <br>
+    <div id="ClearUsers">
+    <h3>
+      Clear All Users
+    </h3>
+    
+      <button class="btn btn-primary" (click) = "clearAllUsers()"> Clear All Users</button>
+    </div>
+  </div>
+
+  <br>
+
+  
+
+<table  class="table table-bordered mat-elevation-z8" *ngIf="userArray">
+  <thead class="thread-light">
   <th>User Name</th>
   <th>Latitude</th>
   <th>Longitude</th>
@@ -26,44 +88,58 @@
 
 <br><br>
 
-<div>
-  <h2>
-    Add Mutiple Users
-  </h2>
-  <div>
-    <button class="btn btn-primary" (click) = "addMultipleUser()"> Add Multiple Users</button>
-  </div>
 
-  <br>
-  <h2>
-    Clear All Users
-  </h2>
-  <div>
-    <button (click) = "clearAllUsers()"> Clear All Users</button>
-  </div>
-</div>
 
 <br>
 
-<div>
-<h2>
-  Delete a User
-</h2>
-  <div>
-    <label>UserName:
-      <input class="form-control" [(ngModel)]='userNameToBeDeleted' placeholder="User Name"/>
-    </label>
 
-    <button class="btn btn-danger" (click) = "deleteUser()"> Remove User</button>
-  </div>
-
-</div>
 
 <h2>
   Add a User
 </h2>
 <div>
-  <label>UserName:
+
+  <div class="input-group input-group-sm mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+    </div>
+    <input [(ngModel)]='userNameToBeAdded' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Latitude</span>
+    </div>
+    <input [(ngModel)]='latitude' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Longitude</span>
+    </div>
+    <input [(ngModel)]='longitude' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">EmergencyType</span>
+    </div>
+    <input [(ngModel)]='useremergencyType' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Severity</span>
+    </div>
+    <input [(ngModel)]='useremergencySeverity' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">HealthStatus</span>
+    </div>
+    <input [(ngModel)]='uservictimHealthStatus' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+  </div>
+
+ <div>
+
+ </div>
+   
+ <button class="btn btn-primary" (click) = "addUser()"> Update User</button>
+  </div>
+
+  <!-- <label>UserName:
     <input [(ngModel)]='userNameToBeAdded' placeholder="User Name"/>
   </label>
   <label>Latitude:
@@ -82,19 +158,65 @@
     <input [(ngModel)]='uservictimHealthStatus' placeholder="health status"/>
   </label>
 
-  <button (click) = "addUser()"> Remove/Update User</button>
-</div>
+  <button (click) = "addUser()"> Remove/Update User</button>  -->
+<br>
+  <div>
+    <h2>
+      Delete a User
+    </h2>
+      <div>
+          <input class="form-control" [(ngModel)]='userNameToBeDeleted' placeholder="User Name"/>
+         <div>
+          <br>
+    
+        <button class="btn btn-primary" (click) = "deleteUser()"> Remove User</button>
+          </div>
+      </div>
+    
+    </div>
 
+</div>  
+
+<!-- --------------------------UserCOmponent Ends---------------------------- -->
+
+
+
+
+<!--                  Rescuer Component Starts                         -->
 
 <br>
-<br>
 
-<div>
+<div *ngIf="RescuersAction">
+
+<div style="color:red;">
   <h1>Rescuers component active</h1>
 </div>
 
+<br>
+
+
+<div id="AddMultipleUsers">
+  <h3>
+    Add Mutiple Rescuers
+  </h3>
+  
+    <button class="btn btn-danger" (click) = "addMultipleRescuer()"> Add Multiple Rescuers</button>
+  
+  <br>
+  <div id="ClearUsers">
+     <h3>
+    Clear All Rescuers
+  </h3>
+    <button class="btn btn-danger" (click) = "clearAllRescuer()"> Clear All Users</button>
+  </div>
+</div>
+
+<br>
+
+
+
 <!--  <div *ngFor="let qwe of rescuers">-->
-<table *ngIf="rescuerArray">
+<table class="table table-bordered mat-elevation-z8" *ngIf="rescuerArray">
   <th>Rescue Name</th>
   <th>Latitude</th>
   <th>Longitude</th>
@@ -110,21 +232,80 @@
 
 <br><br>
 
-<div>
-  <h2>
-    Delete a Rescuer
-  </h2>
-  <div>
-    <label>RescuerName:
-      <input [(ngModel)]='rescuerNameToBeDeleted' placeholder="Rescuer Name"/>
-    </label>
 
-    <button (click) = "deleteRescuer()"> Remove Rescuer</button>
+
+
+
+<!-- -------Add Rescuer-------- -->
+<h2>
+  Add a Rescuer
+</h2>
+<div>
+
+  <div class="input-group input-group-sm mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+    </div>
+    <input [(ngModel)]='rescuerNameToBeAdded' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Latitude</span>
+    </div>
+    <input [(ngModel)]='rescuerlatitude' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Longitude</span>
+    </div>
+    <input [(ngModel)]='rescuerlongitude' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">EmergencyType</span>
+    </div>
+    <input [(ngModel)]='useremergencyType' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Severity</span>
+    </div>
+    <input [(ngModel)]='useremergencySeverity' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">HealthStatus</span>
+    </div>
+    <input [(ngModel)]='uservictimHealthStatus' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
   </div>
 
-</div>
+ <div>
 
-<h2>
+ </div>
+   
+ <button class="btn btn-danger" (click) = "addRescuer()"> Update User</button>
+  </div>
+
+<!-- ---------Add Rescuer End--------- -->
+
+<br>
+  <div>
+    <h2>
+      Delete a Rescuer
+    </h2>
+      <div>
+          <input class="form-control" [(ngModel)]='userNameToBeDeleted' placeholder="User Name"/>
+         <div>
+          <br>
+    
+        <button class="btn btn-danger" (click) = "deleteRescuer()"> Remove User</button>
+          </div>
+      </div>
+    
+    </div>
+
+
+
+  </div>
+
+
+<!-- <h2>
   Add a Rescuer
 </h2>
 <div>
@@ -159,38 +340,35 @@
 </div>
 
 
-<div>
-  <h2>
-    Add Mutiple rescuers
-  </h2>
-  <div>
-    <button (click) = "addMultipleRescuer()"> Add Multiple Rescuers</button>
-  </div>
 
-  <br>
-  <h2>
-    Clear All Rescuers
-  </h2>
-  <div>
-    <button (click) = "clearAllRescuer()"> Clear All Rescuers</button>
-  </div>
+
+<br> -->
+
+
+
+
+<!--                  Rescuer Component Ends                           -->
+
+<div *ngIf="NotificationAction">
+
+<div style=color:grey>
+<h1>Notification sender</h1>
 </div>
 
 <br>
-
-<h1>Notification sender</h1>
-
 <div>
   <label>Notification Message:
     <input type ="text" [(ngModel)]='notificationMessage' placeholder="Notification Message"/>
   </label>
-
-  <button (click) = "sendNotificationToUser()"> Send Notification to User</button>
-  <button (click) = "sendNotificationToRescuer()"> Send Notification to Rescuer</button>
 </div>
-
+<br>
 <div>
-  <button (click) = "getAllNotification()">Get All Notifications</button>
+  <button class="btn btn-primary"(click) = "sendNotificationToUser()"> Send Notification to User</button>
+  <button class="btn btn-danger"(click) = "sendNotificationToRescuer()"> Send Notification to Rescuer</button>
+</div>
+<br><br>
+<div>
+  <button class="btn btn-secondary" (click) = "getAllNotification()">Get All Notifications</button>
 </div>
 <table *ngIf="notificationMessages">
   <th>Notification Message</th>
@@ -202,4 +380,6 @@
   </tr>
 </table>
 
+</div>
 
+</div>

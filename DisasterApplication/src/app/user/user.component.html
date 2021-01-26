@@ -10,9 +10,20 @@
   <div id="map"></div>
 
   <div id="dropdown">
-    <h4 style="color: cornflowerblue">Fill the form for help</h4>
-    <input [(ngModel)]='userNameToBeAdded' placeholder="Rescuer Name"/>
+    
+    <h4 style="color: rgb(48, 49, 51)">Fill the form for help</h4>
     <br>
+    <br>
+    
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+      </div>
+      <input [(ngModel)]='userNameToBeAdded' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+    </div>
+
+    <!-- <input [(ngModel)]='userNameToBeAdded' placeholder="Rescuer Name"/> -->
+
     <mat-form-field appearance="fill">
       <mat-label> Emergency Type</mat-label>
       <mat-select (selectionChange)="changeSelectionOverviewExample($event.value)">
@@ -48,8 +59,8 @@
       </button>
     </div>
 
-    <div style="padding-top: 30px; padding-left: 18px">
-      <button *ngIf="!ifClicked" type="button" (click)="plotOnMap()" class="btn btn-primary"
+    <div style="padding-top: 30px; padding-left: 18px;">
+      <button *ngIf="!ifClicked" type="button" (click)="plotOnMap()" class="btn btn-outline-secondary mr-2"
               ngbPopover="Displaying all Rescue Centres near you" popoverTitle="Rescue Centres near you">
         Show Nearby Victims
       </button>

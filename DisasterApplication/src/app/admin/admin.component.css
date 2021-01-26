@@ -1,0 +1,39 @@
+#mainContainer{
+    height:100%;
+    width:100%;
+}
+
+/* #UserActionsContainer{
+    background-color: rgb(216, 231, 236);
+} */
+
+
+
+h1 {
+    width:500px;
+    margin: 0 auto;
+     /* background: blue; */
+    text-align: center;
+}
+
+#AddMultipleUsers[_ngcontent-vim-c303] {
+    position: relative;
+    margin-top: 0%;
+    width: 500px;
+}
+
+#ClearUsers{
+    position:absolute;
+    margin-top:-6%;
+    margin-left: 86%;
+    width: 500px;
+    float: right;
+}
+
+/* #healthStutus1{
+    width:50px;
+} */
+
+.bg-light {
+    background-color: #c5c5bd;
+}

@@ -14,6 +14,10 @@ import { RescuerComponent } from './rescuer/rescuer.component';
 import {AngularMaterialModule} from './angular-material.module';
 import { RescuerSignUpComponent } from './rescuer-sign-up/rescuer-sign-up.component';
 import {MatTableModule} from '@angular/material/table';
+import { ToastrModule } from 'ngx-toastr';
+//import { CountdownTimerModule } from 'angular-countdown-timer';
+import { CountdownModule } from 'ngx-countdown';
+
 
 
 @NgModule({
@@ -33,7 +37,10 @@ import {MatTableModule} from '@angular/material/table';
     HttpClientModule,
     FormsModule,
     AngularMaterialModule,
-    MatTableModule
+    MatTableModule,
+    ToastrModule.forRoot(),
+    CountdownModule
+   // CountdownTimerModule.forRoot()
    
   ],
   providers: [],

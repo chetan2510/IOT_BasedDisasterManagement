@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {AdminServiceService} from "../admin-service.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {User} from "../User";
+import { ToastrComponentlessModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+//import { CountdownTimerModule } from 'angular-countdown-timer';
 
 declare const L: any;
 
@@ -13,6 +16,8 @@ declare const L: any;
 
 export class UserComponent implements OnInit {
 
+  timeData = "120";
+  //date = new Date('2019-01-26T00:00:00');
   public mymap: any;
   public title = 'Covorsicht';
   private userNotification;
@@ -42,7 +47,7 @@ export class UserComponent implements OnInit {
   };
 
 
-  constructor(private adminService: AdminServiceService) {
+  constructor(private adminService: AdminServiceService,private toastr: ToastrService) {
     this.markersLayer = new L.layerGroup();
   }
 
@@ -86,6 +91,13 @@ public changeSelectionOverviewExample(value){
     // this.getDistance();
   }
 
+  // triggerFunction() {
+  //   console.log('Timer Ended');
+  // }
+
+  handleEvent(event){
+    console.log(event)
+  };
 
   async plotOnMap()  {
     this.ifClicked = true;
@@ -243,7 +255,7 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
       }, (error: HttpErrorResponse) => {
         alert(error.error.message);});
     } else {
-      alert("Please fill all the fields before asking for help");
+      this.toastr.warning("Please fill all the fields before asking for help");
     }
   }
 

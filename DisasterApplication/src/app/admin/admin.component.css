@@ -1,6 +1,7 @@
 #mainContainer{
     height:100%;
     width:100%;
+    
 }
 
 /* #UserActionsContainer{
@@ -37,3 +38,8 @@ h1 {
 .bg-light {
     background-color: #c5c5bd;
 }
+
+/* #UserActionsContainer{
+    background-image: "src/app/admin/background.png";
+    background-color:lightblue ;
+} */

@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {User} from "../User";
 import {Rescuer} from "../Rescuer";
 import {MatTableDataSource} from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin',
@@ -55,11 +56,16 @@ export class AdminComponent implements OnInit {
   public rescuerNameForStatus;
   public rescuerstatusToUpdate;
 
-  constructor(private adminService: AdminServiceService) {  }
+  constructor(private adminService: AdminServiceService,private toastr: ToastrService) {  }
+  
 
   ngOnInit(): void {
     this.getUserList();
     this.getRescuerList();
+  }
+
+  UsersAction(){
+    
   }
 
   private getUserList(): void {
@@ -84,7 +90,7 @@ export class AdminComponent implements OnInit {
         this.getUserList();
       }
     },(error: HttpErrorResponse) => {
-      alert(error.error.message);
+      this.toastr.error(error.error.message);
     });
   }
 
@@ -156,7 +162,7 @@ export class AdminComponent implements OnInit {
       }, (error: HttpErrorResponse) => {
         alert(error.error.message);});
     } else {
-      alert("Please fill all the fields");
+      this.toastr.error("Please fill all the fields");
     }
   }
 

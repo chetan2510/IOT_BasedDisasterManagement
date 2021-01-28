@@ -31,14 +31,14 @@
 </nav>
 
 
-
-
 <!--  <div *ngFor="let qwe of users">-->
   
 <div id="UserActionsContainer" *ngIf="UsersAction" >
+  <!-- style="background-position:100%;background-repeat:no-repeat;background-image:url('./assets/img/background.png')" -->
+  <!-- <img src=”src/assets/img/background.png”> -->
 
   <br>
-  <div style=color:blue >
+  <div style=color:#0d6efd >
     <h1>Users component active</h1>
   </div>
   <br>
@@ -66,15 +66,15 @@
   
 
 <table  class="table table-bordered mat-elevation-z8" *ngIf="userArray">
-  <thead class="thread-light">
-  <th>User Name</th>
-  <th>Latitude</th>
-  <th>Longitude</th>
-  <th>emergencyType</th>
-  <th>emergencySeverity</th>
-  <th>victimHealthStatus</th>
+  <thead >
+  <th><h5>User Name</h5></th>
+  <th><h5>Latitude</h5></th>
+  <th><h5>Longitude</h5></th>
+  <th><h5>EmergencyType</h5></th>
+  <th><h5>EmergencySeverity</h5></th>
+  <th><h5>VictimHealthStatus</h5></th>
   </thead>
-
+  <tbody>
 
   <tr *ngFor="let users of userArray">
     <td>{{users.userName}}</td>
@@ -84,6 +84,7 @@
     <td>{{users.emergencySeverity}}</td>
     <td>{{users.victimHealthStatus}}</td>
   </tr>
+</tbody>
 </table>
 
 <br><br>
@@ -188,7 +189,7 @@
 
 <div *ngIf="RescuersAction">
 
-<div style="color:red;">
+<div style="color:#dc3545;">
   <h1>Rescuers component active</h1>
 </div>
 
@@ -217,17 +218,21 @@
 
 <!--  <div *ngFor="let qwe of rescuers">-->
 <table class="table table-bordered mat-elevation-z8" *ngIf="rescuerArray">
-  <th>Rescue Name</th>
-  <th>Latitude</th>
-  <th>Longitude</th>
-  <th>Status</th>
+  
+  <th><h5>Rescue Name</h5></th>
+  <th><h5>Latitude</h5></th>
+  <th><h5>Longitude</h5></th>
+  <th><h5>Status</h5></th>
 
+
+  <tbody>
   <tr *ngFor="let rescuer of rescuerArray">
     <td>{{rescuer.rescuerName}}</td>
     <td>{{rescuer.latitude}}</td>
     <td>{{rescuer.longitude}}</td>
     <td>{{rescuer.status}}</td>
   </tr>
+</tbody>
 </table>
 
 <br><br>
@@ -356,28 +361,42 @@
 </div>
 
 <br>
-<div>
+<br> <br>
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Notification Message</span>
+  </div>
+  <textarea input type ="text" [(ngModel)]='notificationMessage' class="form-control" aria-label="With textarea"></textarea>
+  
+</div>
+
+<!-- <div>
   <label>Notification Message:
     <input type ="text" [(ngModel)]='notificationMessage' placeholder="Notification Message"/>
   </label>
-</div>
+</div> -->
+
 <br>
 <div>
   <button class="btn btn-primary"(click) = "sendNotificationToUser()"> Send Notification to User</button>
   <button class="btn btn-danger"(click) = "sendNotificationToRescuer()"> Send Notification to Rescuer</button>
 </div>
 <br><br>
-<div>
+<div id="getAllNotificationsButton" style="margin-left: 43%;">
   <button class="btn btn-secondary" (click) = "getAllNotification()">Get All Notifications</button>
 </div>
-<table *ngIf="notificationMessages">
-  <th>Notification Message</th>
-  <th>Receiver</th>
+<br>
 
+<table class="table table-bordered border-dark mat-elevation-z8" *ngIf="notificationMessages">
+  <th><h5>Notification Message</h5></th>
+  <th><h5>Receiver</h5></th>
+
+  <tbody>
   <tr *ngFor="let notification of notificationMessages">
     <td>{{notification.notificationMessage}}</td>
     <td>{{notification.receiver}}</td>
   </tr>
+</tbody>
 </table>
 
 </div>

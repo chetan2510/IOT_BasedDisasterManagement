@@ -21,7 +21,8 @@ export class UserComponent implements OnInit {
   public mymap: any;
   public title = 'Covorsicht';
   private userNotification;
-  public ifClicked = false;
+  public ifClicked = true;
+  public ifShowNearbyVictims = false;
 
 
   public userNameToBeAdded = "";
@@ -100,7 +101,7 @@ public changeSelectionOverviewExample(value){
   };
 
   async plotOnMap()  {
-    this.ifClicked = true;
+    this.ifClicked = false;
     while (true) {
     this.markersLayer.clearLayers();
     await   this.makeAnAPICall();
@@ -186,6 +187,7 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
   async makeAnAPICall() {
     this.latitude = [];
     this.longitude = [];
+    this.resucerName = [];
     const res = await this.adminService.getUserList().toPromise();
       for(let i =0; i < res.length; i++) {
           this.latitude.push(res[i].latitude);
@@ -243,6 +245,7 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
   }
 
   public sendUserDataToBackend() : void{
+    this.ifShowNearbyVictims = true;
       if(this.userNameToBeAdded !== "" && this.uservictimHealthStatus !== "" && this.useremergencyType !== ""  && this.useremergencySeverity !== "") {
       this.user.userName = this.userNameToBeAdded;
       this.user.latitude = this.latitude;

@@ -32,7 +32,7 @@
 
 
 <!--  <div *ngFor="let qwe of users">-->
-  
+
 <div id="UserActionsContainer" *ngIf="UsersAction" >
   <!-- style="background-position:100%;background-repeat:no-repeat;background-image:url('./assets/img/background.png')" -->
   <!-- <img src=”src/assets/img/background.png”> -->
@@ -43,27 +43,27 @@
   </div>
   <br>
 
-  
+
     <div id="AddMultipleUsers">
     <h3>
       Add Mutiple Users
     </h3>
-    
+
       <button class="btn btn-primary" (click) = "addMultipleUser()"> Add Multiple Users</button>
-    
+
     <br>
     <div id="ClearUsers">
     <h3>
       Clear All Users
     </h3>
-    
+
       <button class="btn btn-primary" (click) = "clearAllUsers()"> Clear All Users</button>
     </div>
   </div>
 
   <br>
 
-  
+
 
 <table  class="table table-bordered mat-elevation-z8" *ngIf="userArray">
   <thead >
@@ -136,7 +136,7 @@
  <div>
 
  </div>
-   
+
  <button class="btn btn-primary" (click) = "addUser()"> Update User</button>
   </div>
 
@@ -169,14 +169,14 @@
           <input class="form-control" [(ngModel)]='userNameToBeDeleted' placeholder="User Name"/>
          <div>
           <br>
-    
+
         <button class="btn btn-primary" (click) = "deleteUser()"> Remove User</button>
           </div>
       </div>
-    
+
     </div>
 
-</div>  
+</div>
 
 <!-- --------------------------UserCOmponent Ends---------------------------- -->
 
@@ -200,15 +200,15 @@
   <h3>
     Add Mutiple Rescuers
   </h3>
-  
+
     <button class="btn btn-danger" (click) = "addMultipleRescuer()"> Add Multiple Rescuers</button>
-  
+
   <br>
   <div id="ClearUsers">
      <h3>
     Clear All Rescuers
   </h3>
-    <button class="btn btn-danger" (click) = "clearAllRescuer()"> Clear All Users</button>
+    <button class="btn btn-danger" (click) = "clearAllRescuer()"> Clear All Rescuers</button>
   </div>
 </div>
 
@@ -218,7 +218,7 @@
 
 <!--  <div *ngFor="let qwe of rescuers">-->
 <table class="table table-bordered mat-elevation-z8" *ngIf="rescuerArray">
-  
+
   <th><h5>Rescue Name</h5></th>
   <th><h5>Latitude</h5></th>
   <th><h5>Longitude</h5></th>
@@ -283,8 +283,8 @@
  <div>
 
  </div>
-   
- <button class="btn btn-danger" (click) = "addRescuer()"> Update User</button>
+
+ <button class="btn btn-danger" (click) = "addRescuer()"> Update Rescuers</button>
   </div>
 
 <!-- ---------Add Rescuer End--------- -->
@@ -298,11 +298,11 @@
           <input class="form-control" [(ngModel)]='userNameToBeDeleted' placeholder="User Name"/>
          <div>
           <br>
-    
-        <button class="btn btn-danger" (click) = "deleteRescuer()"> Remove User</button>
+
+        <button class="btn btn-danger" (click) = "deleteRescuer()"> Remove Rescuers</button>
           </div>
       </div>
-    
+
     </div>
 
 
@@ -367,7 +367,7 @@
     <span class="input-group-text">Notification Message</span>
   </div>
   <textarea input type ="text" [(ngModel)]='notificationMessage' class="form-control" aria-label="With textarea"></textarea>
-  
+
 </div>
 
 <!-- <div>

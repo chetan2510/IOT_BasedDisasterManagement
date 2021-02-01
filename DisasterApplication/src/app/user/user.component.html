@@ -10,10 +10,10 @@
   <div id="map"></div>
 
   <div id="dropdown">
-    
+
     <h4 style="color: rgb(48, 49, 51)">Fill the form for help</h4>
     <br>
-    
+
     <div class="input-group input-group-sm mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
@@ -59,7 +59,7 @@
     </div>
 
     <div style="padding-top: 30px; padding-left: 18px;">
-      <button *ngIf="!ifClicked" type="button" (click)="plotOnMap()" class="btn btn-outline-secondary mr-2"
+      <button *ngIf="ifClicked && ifShowNearbyVictims" type="button" (click)="plotOnMap()" class="btn btn-outline-secondary mr-2"
               ngbPopover="Displaying all Rescue Centres near you" popoverTitle="Rescue Centres near you">
         Show Nearby Victims
       </button>
@@ -68,19 +68,19 @@
     <br>
 
 
-     <div id="Timer" > 
+     <div id="Timer" >
       <div class="input-group input-group-sm mb-3">
-        
+
         <div class="input-group-prepend" style="color:firebrick;font-weight:600;padding-left: 27px;">
           <h5><b>Help Reaching In</b></h5>
           <span style="color:black;font-size: x-large;font-weight: 600;background-color:#eac036;text-align: center;"class="input-group-text" id="inputGroup-sizing-sm"><br> <countdown [config]="{leftTime: timeData}" (event)="handleEvent($event)"> </countdown> &nbsp;h </span>
-          
+
         </div>
-        
+
         <!-- <input [(ngModel)]='userNameToBeAdded' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> -->
-        
+
       </div>
-     
+
 
       <!-- <h5>Help Coming In:</h5>
       <countdown [config]="{leftTime: timeData}" (event)="handleEvent($event)"></countdown> -->
@@ -88,13 +88,13 @@
 
       <!-- Timer mode:
 <countdown-timer [start]="date"></countdown-timer>
- 
+
 Countdown:
 <countdown-timer [end]="date"></countdown-timer>
- 
+
 Countdown with zero trigger:
 <countdown-timer (zeroTrigger)="triggerFunction()" [end]="date"></countdown-timer> -->
-    </div> 
+    </div>
 
   </div>
 

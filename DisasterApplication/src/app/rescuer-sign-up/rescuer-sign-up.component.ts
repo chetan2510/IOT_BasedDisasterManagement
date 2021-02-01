@@ -49,7 +49,7 @@ export class RescuerSignUpComponent implements OnInit {
 
     this.adminService.addRescuer(this.rescuer).subscribe(res => {
         alert(res.message);
-      this.router.navigateByUrl("/loginrescuer");
+      this.router.navigateByUrl("/rescuer");
     }, (error: HttpErrorResponse) => {
       alert(error.error.message);
     });

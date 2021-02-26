@@ -5,6 +5,7 @@ import {User} from "../User";
 import { ToastrComponentlessModule } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 //import { CountdownTimerModule } from 'angular-countdown-timer';
+//import 'leaflet.offline';
 
 declare const L: any;
 
@@ -125,23 +126,27 @@ public changeSelectionOverviewExample(value){
       const coords = position.coords;
       this.longitude = coords.longitude;
       this.latitude = coords.latitude;
-      const latLong = [coords.latitude, coords.longitude];
+      //const latLong = [coords.latitude, coords.longitude];
 
       console.log(
         `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
       );
-       this.mymap = L.map('map').setView(latLong, 13);
+
+    });
+      const latLong=[24.911,67.1289];
+
+       this.mymap = L.map('map').setView(latLong, 10);
 
       L.tileLayer(
-        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3VicmF0MDA3IiwiYSI6ImNrYjNyMjJxYjBibnIyem55d2NhcTdzM2IifQ.-NnMzrAAlykYciP4RP9zYQ',
+        'assets/Egypt/{z}/{x}/{y}.png',
         {
-          attribution:
-            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          // attribution:
+          //   'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
           maxZoom: 18,
-          id: 'mapbox/streets-v11',
+          // id: 'mapbox/streets-v11',
           tileSize: 512,
           zoomOffset: -1,
-          accessToken: 'your.mapbox.access.token',
+          // accessToken: 'your.mapbox.access.token',
         }
       ).addTo(this.mymap);
 
@@ -156,18 +161,20 @@ public changeSelectionOverviewExample(value){
       marker.bindPopup('<b>You</b>').openPopup();
       //marker._icon.classList.add("huechange");
 
-//    HERE
-var markerFrom = L.marker([50.120033,8.6527636], { color: "#F00", radius: 10 });
-var markerTo =  L.circleMarker([50.161064818858684,8.748550415039064], { color: "#4AFF00", radius: 10 });
-var from = markerFrom.getLatLng();
-var to = markerTo.getLatLng();
-markerFrom.bindPopup('pointA ' + (from).toString());
-markerTo.bindPopup('pointB ' + (to).toString());
-// this.mymap.addLayer(markerTo);
-// this.mymap.addLayer(markerFrom);
-var disatance = from.distanceTo(to)
+// //    HERE
+// var markerFrom = L.marker([50.120033,8.6527636], { color: "#F00", radius: 10 });
+// var markerTo =  L.circleMarker([50.161064818858684,8.748550415039064], { color: "#4AFF00", radius: 10 });
+// var from = markerFrom.getLatLng();
+// var to = markerTo.getLatLng();
+// markerFrom.bindPopup('pointA ' + (from).toString());
+// markerTo.bindPopup('pointB ' + (to).toString());
+// // this.mymap.addLayer(markerTo);
+// // this.mymap.addLayer(markerFrom);
+// var disatance = from.distanceTo(to)
 
-console.log("distance from point a to point B",from.distanceTo(to).toString(),"m");
+// console.log("distance from point a to point B",from.distanceTo(to).toString(),"m");
+
+// // Here
 
       var circle = L.circle(latLong, {
         color: '#ff6666',
@@ -180,8 +187,8 @@ console.log("distance from point a to point B",from.distanceTo(to).toString(),"m
         .setLatLng(latLong)
         .setContent('You are in Disaster Zone')
         .openOn(this.mymap);
-    });
-    this.watchPosition();
+   // });
+    //this.watchPosition();
   }
 
   async makeAnAPICall() {

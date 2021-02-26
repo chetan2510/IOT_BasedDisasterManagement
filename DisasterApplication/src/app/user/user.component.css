@@ -26,7 +26,8 @@
 
 
   #map {
-    height: 583px;
+    height: 460px;
+    /* height: 583px; */
     width: 1000px;
     position: absolute;
     right: 1px;

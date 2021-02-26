@@ -17,6 +17,7 @@ import {MatTableModule} from '@angular/material/table';
 import { ToastrModule } from 'ngx-toastr';
 //import { CountdownTimerModule } from 'angular-countdown-timer';
 import { CountdownModule } from 'ngx-countdown';
+import 'leaflet.offline';
 
 
 

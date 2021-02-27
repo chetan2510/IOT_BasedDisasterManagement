@@ -20,18 +20,27 @@
     height: 58px;
     padding: 7px;
     color: antiquewhite;
+    
 
 
   }
 
 
   #map {
-    height: 460px;
+    height: 485px;
     /* height: 583px; */
     width: 1000px;
     position: absolute;
     right: 1px;
-    /* background-image: url(Disaster.png); */
+    background-image: url(background.png);
+  }
+
+  #userMessage{
+    width: 1000px;
+    right: 1px;
+    margin-top: 487px;
+    margin-left: 338px;
+
   }
 
   #dropdown {

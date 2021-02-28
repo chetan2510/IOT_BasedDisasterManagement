@@ -17,6 +17,7 @@ export class RescuerComponent implements OnInit {
   public password;
   public isSignInSuccessfull = false;
   public latitude;
+  public showPortal = false;
   public longitude;
   public userlatitude;
   public userlongitude;
@@ -264,6 +265,10 @@ this.users = [];
       alert(res.message);
       }, (error: HttpErrorResponse) => {
       alert(error.error.message);});
+  }
+
+  public openNewWindow() {
+    this.router.navigate(['/chat'], { queryParams: { userName: this.rescuerUsername } } );
   }
 
 }

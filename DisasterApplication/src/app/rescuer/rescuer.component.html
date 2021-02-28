@@ -46,4 +46,16 @@
 
   <div id="map"></div>
 
+  <!-- Whatever you wrap with the '<window>' component will be rendered on a new window  -->
+<!--  <window *ngIf="showPortal">-->
+<!--    <h2>Hello world from amother window!!</h2>-->
+<!--    <button (click)="this.showPortal = false">Close me!</button>-->
+<!--    <app-user-chat [recuerId]="rescuerUsername">-->
+<!--    </app-user-chat>-->
+<!--  </window>-->
+  <div>
+    <button (click)="this.openNewWindow()">CHAT</button>
+  </div>
+
+
 </div>

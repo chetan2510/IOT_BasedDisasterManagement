@@ -28,10 +28,12 @@
     "angular8-countdown-timer": "^1.0.0",
     "bootstrap": "^5.0.0-beta1",
     "leaflet.offline": "^2.0.0-beta.3",
+    "net": "^1.0.2",
     "ngx-countdown": "^11.0.1",
     "ngx-countdown-timer": "^0.2.0",
     "ngx-toastr": "^13.2.0",
     "rxjs": "~6.5.4",
+    "stompjs": "^2.3.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 //import { CountdownTimerModule } from 'angular-countdown-timer';
 import { CountdownModule } from 'ngx-countdown';
 import 'leaflet.offline';
+import { UserChatComponent } from './user-chat/user-chat.component';
 
 
 
@@ -27,7 +28,8 @@ import 'leaflet.offline';
     UserComponent,
     AdminComponent,
     RescuerComponent,
-    RescuerSignUpComponent
+    RescuerSignUpComponent,
+    UserChatComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ import 'leaflet.offline';
     ToastrModule.forRoot(),
     CountdownModule
    // CountdownTimerModule.forRoot()
-   
+
   ],
   providers: [],
   bootstrap: [AppComponent]

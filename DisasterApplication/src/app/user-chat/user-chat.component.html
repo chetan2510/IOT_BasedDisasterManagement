@@ -1,0 +1,39 @@
+<div>
+  <h3>Welcome {{this.userName}}</h3>
+</div>
+
+<div>
+
+  <table class="table table-hover" *ngIf="greetings">
+
+    <tbody>
+    <tr *ngFor="let rescuer of greetings">
+      <td>{{rescuer}}</td>
+    </tr>
+    </tbody>
+  </table>
+<!--<div *ngFor="let string of greetings">-->
+<!--  <div>-->
+<!--    <table>-->
+<!--    <td>-->
+<!--      <tr>{{string}}</tr>-->
+<!--    </td>-->
+<!--    </table>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div>
+
+</div>
+<form #loginForm=ngForm>
+  <div>
+    <text>
+
+    </text>
+    <br>
+    <textarea autocomplete="off" placeholder="Type Your Message..." name="newmessage" [(ngModel)]="newmessage" required></textarea>
+    <button class="btn btn-primary" (click)="sendMessage()" [disabled]="!loginForm.valid">Send</button>
+  </div>
+</form>
+
+</div>

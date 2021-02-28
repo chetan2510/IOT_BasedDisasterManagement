@@ -5,6 +5,7 @@ import {User} from "../User";
 import {Rescuer} from "../Rescuer";
 import {MatTableDataSource} from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -56,8 +57,8 @@ export class AdminComponent implements OnInit {
   public rescuerNameForStatus;
   public rescuerstatusToUpdate;
 
-  constructor(private adminService: AdminServiceService,private toastr: ToastrService) {  }
-  
+  constructor(private adminService: AdminServiceService,private toastr: ToastrService, private router: Router) {  }
+
 
   ngOnInit(): void {
     this.getUserList();
@@ -65,7 +66,7 @@ export class AdminComponent implements OnInit {
   }
 
   UsersAction(){
-    
+
   }
 
   private getUserList(): void {
@@ -238,5 +239,10 @@ export class AdminComponent implements OnInit {
       alert(error.error.message);
     });
   }
+
+  public startChat() {
+    this.router.navigate(['/chat'], { queryParams: { userName: "Admin" } } );
+  }
+
 
 }

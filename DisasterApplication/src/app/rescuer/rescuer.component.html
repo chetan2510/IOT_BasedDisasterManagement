@@ -18,22 +18,26 @@
   </mat-card>
 
 </div>
-
+<div id="map"></div>
 
 <div *ngIf = "isSignInSuccessfull">
+ 
+  <div id="main_container" >
 
-  <div id="main_container" style="alignment: center">
-
-
+    
     <div id="title">
-
-      <h2> Welcome {{rescuerUsername}} </h2>
+      <a class="navbar-brand" href="rescuer"> <h3 style="display: inline;color:azure">Rescuer</h3></a>
+      <h2 style="display: inline;margin-left: 32%;"> Welcome {{rescuerUsername}} </h2>
 
     </div>
+<br>
+    <div style="width:35%;margin-left: 45%;">
+      <button class="btn btn-secondary" (click)="this.openNewWindow()">Chat With Admins</button>
+    </div>
 
-      <div class="button1">
+      <div style="width:35%;margin-top: -3%;" class="button1">
         <button *ngIf="!isTakingBreak" type="button" (click)="startRescuing()" class="btn btn-outline-secondary mr-2" placement="top"
-                style="background-color:#b22222;color: linen;height: 45px;width: 150px;">
+                style="background-color:#3cc97b;color: linen;height: 45px;width: 150px;">
          Start Rescuing
         </button>
 
@@ -42,9 +46,11 @@
           Take Break
         </button>
       </div>
+
+      
     </div>
 
-  <div id="map"></div>
+  
 
   <!-- Whatever you wrap with the '<window>' component will be rendered on a new window  -->
 <!--  <window *ngIf="showPortal">-->
@@ -53,9 +59,7 @@
 <!--    <app-user-chat [recuerId]="rescuerUsername">-->
 <!--    </app-user-chat>-->
 <!--  </window>-->
-  <div>
-    <button (click)="this.openNewWindow()">CHAT</button>
-  </div>
+
 
 
 </div>

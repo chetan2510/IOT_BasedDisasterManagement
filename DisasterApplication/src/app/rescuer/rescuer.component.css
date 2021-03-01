@@ -109,9 +109,28 @@ body {
 }
 
 #map {
-  height: 583px;
-  width: 1000px;
+  height: 497px;
+  width: 1333px;
   position: absolute;
-  right: 1px;
-  /* background-image: url(Disaster.png); */
+  right: 7px;
+  margin-top: 11%;
+}
+  /* background-image: url(background.png); */
+
+#main_container{
+position: relative;
+height: 600px;
+width: 1340px;
+margin: 0%;
+margin: 7px;
+}
+
+#title{
+
+  width: 1340px;
+  background-color:firebrick;
+  text-align: left;
+  height: 58px;
+  padding: 7px;
+  color: antiquewhite;
 }

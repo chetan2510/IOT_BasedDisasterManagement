@@ -27,8 +27,21 @@ h1 {
     position:absolute;
     margin-top:-6%;
     margin-left: 86%;
-    width: 500px;
-    float: right;
+    width: 187px;
+    
+}
+
+#ClearRescuers{
+    position: absolute;
+    margin-top: -6%;
+    margin-left: 82%;
+    width: 231px;
+}
+#Chat{
+position: absolute;
+margin-top: -3%;
+margin-left: 42%;
+width: 231px;
 }
 
 /* #healthStutus1{

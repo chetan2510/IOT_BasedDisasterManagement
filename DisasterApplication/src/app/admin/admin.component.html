@@ -39,7 +39,7 @@
 
   <br>
   <div style=color:#0d6efd >
-    <h1>Users component active</h1>
+    <h1>Users Component</h1>
   </div>
   <br>
 
@@ -190,7 +190,7 @@
 <div *ngIf="RescuersAction">
 
 <div style="color:#dc3545;">
-  <h1>Rescuers component active</h1>
+  <h1>Rescuers Component</h1>
 </div>
 
 <br>
@@ -204,19 +204,19 @@
     <button class="btn btn-danger" (click) = "addMultipleRescuer()"> Add Multiple Rescuers</button>
 
   <br>
-  <div>
+  <div id="ClearRescuers">
     <h3>
       Clear All Rescuers
     </h3>
     <button class="btn btn-danger" (click) = "clearAllRescuer()"> Clear All Rescuers</button>
   </div>
-  <br>
+  
 
-  <div>
-    <h3>
+  <div id="Chat">
+    <!-- <h3>
       Start Chatting
-    </h3>
-    <button class="btn btn-success" (click)="this.startChat()"> Start Chat</button>
+    </h3> -->
+    <button class="btn btn-secondary" (click)="this.startChat()"> Chat with Rescuers</button>
   </div>
 
 </div>

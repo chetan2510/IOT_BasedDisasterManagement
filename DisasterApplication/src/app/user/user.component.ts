@@ -17,13 +17,15 @@ declare const L: any;
 
 export class UserComponent implements OnInit {
 
-  timeData = "120";
+  public timeData;
+   //timeData = 120;
   //date = new Date('2019-01-26T00:00:00');
   public mymap: any;
-  public title = 'Covorsicht';
+  public title = 'Disaster Management App';
   private userNotification;
-  public ifClicked = true;
+  public ifClicked = true;                    // "Show Neary VIctims" button to be removed upon click
   public ifShowNearbyVictims = false;
+  public ifClickedbutton1 = true;             // "Ask For help" Button to be removed upon click"
 
 
   public userNameToBeAdded = "";
@@ -150,14 +152,14 @@ public changeSelectionOverviewExample(value){
         }
       ).addTo(this.mymap);
 
-  var greenIcon = L.icon({
+  var redIcon = L.icon({
     iconUrl: 'assets/img/red_shadow.png',
    // iconRetinaUrl: 'img/marker-icon-2x-black.png',
     iconSize:     [25, 41], // size of the icon
 
 });
 
-     let marker =L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
+     let marker =L.marker (latLong, {icon: redIcon}).addTo(this.mymap);
       marker.bindPopup('<b>You</b>').openPopup();
       //marker._icon.classList.add("huechange");
 
@@ -206,8 +208,15 @@ public changeSelectionOverviewExample(value){
 
    plotLatsOnMap(): void {
      let marker;
+     var redIcon = L.icon({
+      iconUrl: 'assets/img/red_shadow.png',
+     // iconRetinaUrl: 'img/marker-icon-2x-black.png',
+      iconSize:     [25, 41], // size of the icon
+  
+  });
      for(let i = 0; i < this.latitude.length; i++) {
-       marker = L.marker([this.latitude[i], this.longitude[i]]).bindPopup('<b>' + this.resucerName[i]+'</b>');
+
+       marker = L.marker([this.latitude[i], this.longitude[i]],{icon: redIcon}).bindPopup('<b>' + this.resucerName[i]+'</b>');
        marker.addTo(this.markersLayer);
      }
      this.markersLayer.addTo(this.mymap);
@@ -252,7 +261,13 @@ public changeSelectionOverviewExample(value){
   }
 
   public sendUserDataToBackend() : void{
-    this.ifShowNearbyVictims = true;
+
+    //this.timeData = 120;
+
+    
+    
+    
+
       if(this.userNameToBeAdded !== "" && this.uservictimHealthStatus !== "" && this.useremergencyType !== ""  && this.useremergencySeverity !== "") {
       this.user.userName = this.userNameToBeAdded;
       this.user.latitude = this.latitude;
@@ -262,11 +277,19 @@ public changeSelectionOverviewExample(value){
       this.user.victimHealthStatus = this.uservictimHealthStatus
       this.adminService.addUser(this.user).subscribe(res => {
         alert(res.message);
-      }, (error: HttpErrorResponse) => {
+      }, (error: HttpErrorResponse) => {  
         alert(error.error.message);});
-    } else {
+        this.ifClickedbutton1 = false;      //  "Ask For help" Button to be removed upon click
+        this.ifShowNearbyVictims = true;    // "Show Neary VIctims" button to be removed upon click
+    } 
+    
+    
+    else {
       this.toastr.warning("Please fill all the fields before asking for help");
+      this.ifClickedbutton1 = true;
     }
+    
+    this.timeData = 120;
   }
 
 

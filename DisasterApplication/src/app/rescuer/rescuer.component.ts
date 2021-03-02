@@ -93,12 +93,12 @@ export class RescuerComponent implements OnInit {
 
   async makeAnAPICall() {
 
-this.userlatitude = [];
-this.userlongitude = [];
-this.users = [];
+
+// To get Rescuers data in the array
     this.latitude = [];
     this.longitude = [];
     this.rescuers = [];
+
     const res = await this.adminService.getAllRescuers().toPromise();
     for(let i =0; i < res.length; i++) {
       if(res[i].status !== "Inactive") {
@@ -107,6 +107,12 @@ this.users = [];
         this.rescuers.push(res[i].rescuerName);
       }
     };
+
+// To get Users data in the array
+this.userlatitude = [];            
+this.userlongitude = [];           
+this.users = [];
+
 
     const resUsers = await this.adminService.getUserList().toPromise();
     for(let i =0; i < resUsers.length; i++) {
@@ -119,24 +125,26 @@ this.users = [];
   plotLatsOnMap(): void {
     let marker;
     for(let i = 0; i < this.latitude.length; i++) {
-      var greenIcon = L.icon({
-        iconUrl: 'assets/img/red_shadow.png',
+      var blueIcon = L.icon({
+        iconUrl: 'assets/img/green.png',
         // iconRetinaUrl: 'img/marker-icon-2x-black.png',
         iconSize:     [25, 41], // size of the icon
 
       });
-      marker = L.marker([this.latitude[i], this.longitude[i]], {icon: greenIcon}).bindPopup('<b>' +this.rescuers[i] +'</b>');
+      marker = L.marker([this.latitude[i], this.longitude[i]], {icon: blueIcon}).bindPopup('<b>' +this.rescuers[i] +'</b>');
       marker.addTo(this.markersLayer);
     }
 
+
+
     for(let i = 0; i < this.userlatitude.length; i++) {
-      // var greenIcon = L.icon({
-      //   iconUrl: 'assets/img/bl.png',
-      //   // iconRetinaUrl: 'img/marker-icon-2x-black.png',
-      //   iconSize:     [25, 41], // size of the icon
-      //
-      // });
-      marker = L.marker([this.userlatitude[i], this.userlongitude[i]]).bindPopup('<b>' +this.users[i] +'</b>');
+      var redIcon = L.icon({
+        iconUrl: 'assets/img/red.png',
+        // iconRetinaUrl: 'img/marker-icon-2x-black.png',
+        iconSize:     [25, 41], // size of the icon
+  
+      });
+      marker = L.marker([this.userlatitude[i], this.userlongitude[i]],{icon: redIcon}).bindPopup('<b>' +this.users[i] +'</b>');
       marker.addTo(this.markersLayer);
     }
 

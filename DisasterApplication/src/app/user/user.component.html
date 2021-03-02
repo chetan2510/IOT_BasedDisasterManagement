@@ -57,7 +57,7 @@
 
 
     <div class="button1">
-      <button type="button" (click)="sendUserDataToBackend()" class="btn btn-outline-secondary mr-2" placement="top"
+      <button *ngIf="ifClickedbutton1" type="button" (click)="sendUserDataToBackend()" class="btn btn-outline-secondary mr-2" placement="top"
               style="background-color:#b22222;color: linen;height: 45px;width: 150px;">
         Ask for help
       </button>
@@ -79,7 +79,7 @@
 
         <div class="input-group-prepend" style="color:firebrick;font-weight:600;padding-left: 27px;">
           <h5><b>Help Reaching In</b></h5>
-          <span style="color:black;font-size: x-large;font-weight: 600;background-color:#eac036;text-align: center;"class="input-group-text" id="inputGroup-sizing-sm"><br> <countdown [config]="{leftTime: timeData}" (event)="handleEvent($event)"> </countdown> &nbsp;h </span>
+          <span style="color:black;font-size: x-large;font-weight: 600;background-color:#eac036;text-align: center;"class="input-group-text" id="inputGroup-sizing-sm"><br> <countdown [config]="{leftTime: timeData}" (event)="handleEvent($event)"> </countdown>  </span>
 
         </div>
 

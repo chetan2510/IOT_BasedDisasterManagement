@@ -4,9 +4,11 @@
     
 }
 
-/* #UserActionsContainer{
-    background-color: rgb(216, 231, 236);
-} */
+/* Logo centered to the div */
+img, svg {
+    vertical-align: middle;
+    max-width: 102%;
+  }
 
 
 

@@ -10,7 +10,18 @@
   }
 
 
-
+/* #logoBox{
+  background-image: url(FRAlogo.jpg);
+  width: 113px;
+  height: 59px;
+  margin-top: -4.0%;
+  margin-left: 92%;
+} */
+/* For fra logo to be centered within a div */
+img, svg {
+  vertical-align: middle;
+  max-width: 102%;
+}
 
   #title{
 
@@ -27,12 +38,12 @@
 
 
   #map {
-    height: 485px;
+    height: 550px;
     /* height: 583px; */
     width: 1000px;
     position: absolute;
     right: 1px;
-    background-image: url(background.png);
+    background-image: url(/assets/img/background.png);
   }
 
   #userMessage{

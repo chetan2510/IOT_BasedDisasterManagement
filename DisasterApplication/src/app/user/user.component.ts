@@ -17,8 +17,8 @@ declare const L: any;
 
 export class UserComponent implements OnInit {
 
-  public timeData;
-   //timeData = 120;
+  //public timeData;
+   timeData = 120;
   //date = new Date('2019-01-26T00:00:00');
   public mymap: any;
   public title = 'Disaster Management App';
@@ -289,7 +289,7 @@ public changeSelectionOverviewExample(value){
       this.ifClickedbutton1 = true;
     }
     
-    this.timeData = 120;
+   // this.timeData = "120";
   }
 
 

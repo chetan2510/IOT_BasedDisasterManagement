@@ -114,8 +114,9 @@ body {
   position: absolute;
   right: 7px;
   margin-top: 11%;
+  /* background-image: url(/assets/img/background.png); */
 }
-  /* background-image: url(background.png); */
+ 
 
 #main_container{
 position: relative;
@@ -123,6 +124,11 @@ height: 600px;
 width: 1340px;
 margin: 0%;
 margin: 7px;
+}
+/* Logo centered to the div */
+img, svg {
+  vertical-align: middle;
+  max-width: 102%;
 }
 
 #title{

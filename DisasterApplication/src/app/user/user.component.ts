@@ -140,7 +140,7 @@ public changeSelectionOverviewExample(value){
        this.mymap = L.map('map').setView(latLong, 10);
 
       L.tileLayer(
-        'assets/Pakistan/{z}/{x}/{y}.png',
+        'assets/map/{z}/{x}/{y}.png',
         {
           // attribution:
           //   'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -182,7 +182,7 @@ public changeSelectionOverviewExample(value){
         color: '#ff6666',
         fillColor: '#f03',
         fillOpacity: 0.5,
-        radius: 1500
+        radius: 14000
 
     }).addTo(this.mymap);
       let popup = L.popup()

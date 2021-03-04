@@ -1,5 +1,6 @@
-<div>
-  <h3>Welcome {{this.userName}}</h3>
+<div id="title" style="background-color: #e3f2fd;height: 55px;">
+  
+  <h2 style="padding-top: 0.5%;;text-align: center;color:#0d6efd"> Welcome {{this.userName}} Chat Room </h2>
 </div>
 
 <div>
@@ -31,9 +32,16 @@
 
     </text>
     <br>
-    <textarea autocomplete="off" placeholder="Type Your Message..." name="newmessage" [(ngModel)]="newmessage" required></textarea>
-    <button class="btn btn-primary" (click)="sendMessage()" [disabled]="!loginForm.valid">Send</button>
+    <div class="input-group" style="width: 64%;">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Chat Message</span>
+    </div>
+    <textarea autocomplete="off" class="form-control" style="height:50px" placeholder="Type Your Message..." name="newmessage" [(ngModel)]="newmessage" required></textarea>
+  
+    <button class="btn btn-primary" style="width:74px" (click)="sendMessage()" [disabled]="!loginForm.valid">Send</button>
   </div>
+  </div> 
+
 </form>
 
 </div>

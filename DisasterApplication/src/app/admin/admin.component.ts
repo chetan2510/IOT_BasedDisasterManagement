@@ -173,7 +173,7 @@ export class AdminComponent implements OnInit {
       this.rescuer.rescuerName = this.rescuerNameToBeAdded;
       this.rescuer.latitude = this.rescuerlatitude;
       this.rescuer.longitude = this.rescuerlongitude;
-      this.rescuer.status = this.rescuerstatus;
+      this.rescuer.status = "Active";
       this.rescuer.password = this.rescuerpassword;
 
       this.adminService.addRescuer(this.rescuer).subscribe(res => {
@@ -241,7 +241,8 @@ export class AdminComponent implements OnInit {
   }
 
   public startChat() {
-    this.router.navigate(['/chat'], { queryParams: { userName: "Admin" } } );
+    window.open('http://localhost:4200/chat?userName=Admin', '', 'width=600,height=400,left=200,top=200');
+    //this.router.navigate(['/chat'], { queryParams: { userName: "Admin" }} );
   }
 
 

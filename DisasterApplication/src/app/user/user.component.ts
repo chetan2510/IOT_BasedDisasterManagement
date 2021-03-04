@@ -17,8 +17,8 @@ declare const L: any;
 
 export class UserComponent implements OnInit {
 
-  //public timeData;
-   timeData = 120;
+   timeData: any;
+  //  timeData = 120;
   //date = new Date('2019-01-26T00:00:00');
   public mymap: any;
   public title = 'Disaster Management App';
@@ -135,7 +135,7 @@ public changeSelectionOverviewExample(value){
       );
 
     });
-      const latLong=[24.911,67.1289];
+      const latLong=[50.120350,8.651000];
 
        this.mymap = L.map('map').setView(latLong, 10);
 
@@ -212,7 +212,7 @@ public changeSelectionOverviewExample(value){
       iconUrl: 'assets/img/red_shadow.png',
      // iconRetinaUrl: 'img/marker-icon-2x-black.png',
       iconSize:     [25, 41], // size of the icon
-  
+
   });
      for(let i = 0; i < this.latitude.length; i++) {
 
@@ -260,13 +260,13 @@ public changeSelectionOverviewExample(value){
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
-  public sendUserDataToBackend() : void{
+  public sendUserDataToBackend() : void {
 
     //this.timeData = 120;
 
-    
-    
-    
+
+
+
 
       if(this.userNameToBeAdded !== "" && this.uservictimHealthStatus !== "" && this.useremergencyType !== ""  && this.useremergencySeverity !== "") {
       this.user.userName = this.userNameToBeAdded;
@@ -277,19 +277,19 @@ public changeSelectionOverviewExample(value){
       this.user.victimHealthStatus = this.uservictimHealthStatus
       this.adminService.addUser(this.user).subscribe(res => {
         alert(res.message);
-      }, (error: HttpErrorResponse) => {  
+      }, (error: HttpErrorResponse) => {
         alert(error.error.message);});
         this.ifClickedbutton1 = false;      //  "Ask For help" Button to be removed upon click
         this.ifShowNearbyVictims = true;    // "Show Neary VIctims" button to be removed upon click
-    } 
-    
-    
+    }
+
+
     else {
       this.toastr.warning("Please fill all the fields before asking for help");
       this.ifClickedbutton1 = true;
     }
-    
-   // this.timeData = "120";
+
+    this.timeData = 120;
   }
 
 

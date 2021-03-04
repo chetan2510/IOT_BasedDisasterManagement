@@ -39,7 +39,7 @@ export class RescuerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+
   }
 
   public signIn(): void {
@@ -83,7 +83,7 @@ export class RescuerComponent implements OnInit {
   async plotOnMap()  {
     while (this.isTakingBreak) {
       this.markersLayer.clearLayers();
-      await   this.makeAnAPICall();
+      await  this.makeAnAPICall();
       this.plotLatsOnMap();
       await this.getRescuerNotification();
       await this.delay(5000);
@@ -109,8 +109,8 @@ export class RescuerComponent implements OnInit {
     };
 
 // To get Users data in the array
-this.userlatitude = [];            
-this.userlongitude = [];           
+this.userlatitude = [];
+this.userlongitude = [];
 this.users = [];
 
 
@@ -142,7 +142,7 @@ this.users = [];
         iconUrl: 'assets/img/red.png',
         // iconRetinaUrl: 'img/marker-icon-2x-black.png',
         iconSize:     [25, 41], // size of the icon
-  
+
       });
       marker = L.marker([this.userlatitude[i], this.userlongitude[i]],{icon: redIcon}).bindPopup('<b>' +this.users[i] +'</b>');
       marker.addTo(this.markersLayer);
@@ -176,16 +176,16 @@ this.users = [];
       this.longitude = coords.longitude;
       this.latitude = coords.latitude;
       //const latLong = [coords.latitude, coords.longitude];
-      const latLong=[24.911,67.1289];
+      const latLong=[50.120350,8.651000];
       console.log(
         `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
       );
     });
-    const latLong=[24.911,67.1289];
+    const latLong=[50.120350,8.651000];
       this.mymap = L.map('map').setView(latLong, 10);
 
       L.tileLayer(
-        'assets/Pakistan/{z}/{x}/{y}.png',
+        'assets/map/{z}/{x}/{y}.png',
         {
           // attribution:
           //   'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -198,14 +198,14 @@ this.users = [];
       ).addTo(this.mymap);
 
       var greenIcon = L.icon({
-        iconUrl: 'assets/img/red_shadow.png',
+        iconUrl: 'assets/img/green.png',
         // iconRetinaUrl: 'img/marker-icon-2x-black.png',
         iconSize:     [25, 41], // size of the icon
 
       });
 
       let marker =L.marker (latLong, {icon: greenIcon}).addTo(this.mymap);
-      marker.bindPopup('<b>You</b>').openPopup();
+      marker.bindPopup('<b>'+ this.rescuerUsername+'</b>').openPopup();
       //marker._icon.classList.add("huechange");
 
 // //    HERE
@@ -221,13 +221,13 @@ this.users = [];
 
 //       console.log("distance from point a to point B",from.distanceTo(to).toString(),"m");
 
-      var circle = L.circle(latLong, {
-        color: '#ff6666',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 1500
-
-      }).addTo(this.mymap);
+      // var circle = L.circle(latLong, {
+      //   color: '#ff6666',
+      //   fillColor: '#f03',
+      //   fillOpacity: 0.5,
+      //   radius: 1500
+      //
+      // }).addTo(this.mymap);
 
       let popup = L.popup()
         .setLatLng(latLong)
@@ -279,7 +279,8 @@ this.users = [];
   }
 
   public openNewWindow() {
-    this.router.navigate(['/chat'], { queryParams: { userName: this.rescuerUsername } } );
+    window.open('http://localhost:4200/chat?userName='+this.rescuerUsername, '', 'width=600,height=400,left=200,top=200');
+    // this.router.navigate(['/chat'], { queryParams: { userName: this.rescuerUsername } } );
   }
 
 }

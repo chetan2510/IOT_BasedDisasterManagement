@@ -2,9 +2,9 @@
 <div id="mainContainer">
 
 <div id="title">
-  
+
 <nav class="navbar navbar-expand-sm navbark-dark" style="background-color: #e3f2fd;">
-  
+
   <a class="navbar-brand" href="admin"> <h4>Admin</h4></a>
 <ul class="navbar-nav">
   <li class="nav-item">
@@ -63,7 +63,7 @@
     <br>
     <div id="ClearUsers">
     <h3>
-      Clear All Users
+      Clear Users
     </h3>
 
       <button class="btn btn-primary" (click) = "clearAllUsers()"> Clear All Users</button>
@@ -215,11 +215,11 @@
   <br>
   <div id="ClearRescuers">
     <h3>
-      Clear All Rescuers
+      Clear Rescuers
     </h3>
-    <button class="btn btn-danger" (click) = "clearAllRescuer()"> Clear All Rescuers</button>
+    <button class="btn btn-danger" (click) = "clearAllRescuer()"> Clear Rescuers</button>
   </div>
-  
+
 
   <div id="Chat">
     <!-- <h3>
@@ -313,7 +313,7 @@
       Delete a Rescuer
     </h2>
       <div>
-          <input class="form-control" [(ngModel)]='userNameToBeDeleted' placeholder="User Name"/>
+          <input class="form-control" [(ngModel)]='rescuerNameToBeDeleted' placeholder="User Name"/>
          <div>
           <br>
 
@@ -401,10 +401,13 @@
 </div>
 <br><br>
 <div id="getAllNotificationsButton" style="margin-left: 43%;">
-  <button class="btn btn-secondary" (click) = "getAllNotification()">Get All Notifications</button>
+<!--  <button class="btn btn-secondary" (click) = "getAllNotification()">Get All Notifications</button>-->
 </div>
 <br>
 
+  <div style=color:grey>
+    <h1>Notifications Sent So Far</h1>
+  </div>
 <table class="table table-bordered border-dark mat-elevation-z8" *ngIf="notificationMessages">
   <th><h5>Notification Message</h5></th>
   <th><h5>Receiver</h5></th>

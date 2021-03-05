@@ -20,7 +20,7 @@ export class UserChatComponent implements OnInit {
   disabled = true;
   newmessage: string;
   private stompClient = null;
-  // STEP 2: save a reference to the window so we can close it
+  // Save a reference to the window so we can close it
   private externalWindow = null;
 
   constructor(private route: ActivatedRoute) { }
@@ -31,7 +31,7 @@ export class UserChatComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    // STEP 7: close the window when this component destroyed
+    // Close the window when this component destroyed
     this.externalWindow.close()
   }
 

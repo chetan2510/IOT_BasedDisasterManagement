@@ -1,3 +1,5 @@
+
+<!-- TO display Sign Up/ Sign In Page  -->
 <div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center" *ngIf = "!isSignInSuccessfull">
 
   <mat-card class="box">
@@ -22,27 +24,33 @@
 
 <div *ngIf = "isSignInSuccessfull">
  
+  <!-- TO display the Rescuer Page -->
   <div id="main_container" >
 
-    
+    <!-- TO display the title -->
     <div id="title">
       <a class="navbar-brand" href="rescuer"> <h4 style="display: inline;color:azure">Rescuer</h4></a>
       <h2 style="display: inline;margin-left: 32%;"> Welcome {{rescuerUsername}} </h2>
      
+      <!-- TO display the university logo -->
       <div id="logoBox"  style="width: 113px; height: 59px;margin-top: -3.4%;margin-left: 92%;">
         <img src="/assets/img/FRAlogo.jpg">
     </div>
+
 <br>
+      <!-- TO display the Chat With Admins button -->
     <div style="width:35%;margin-left: 45%;">
       <button class="btn btn-secondary" (click)="this.openNewWindow()">Chat With Admins</button>
     </div>
 
+      <!-- TO display Start Rescuing Button button -->
       <div style="width:35%;margin-top: -3%;" class="button1">
         <button *ngIf="!isTakingBreak" type="button" (click)="startRescuing()" class="btn btn-outline-secondary mr-2" placement="top"
                 style="background-color:#3cc97b;color: linen;height: 45px;width: 150px;">
          Start Rescuing
         </button>
 
+        <!-- TO change the Start Rescuing Button once pressed to Take Break button -->
         <button *ngIf="isTakingBreak" type="button" (click)="stopRescuing()" class="btn btn-outline-secondary mr-2" placement="top"
                 style="background-color:#b22222;color: linen;height: 45px;width: 150px;">
           Take Break
@@ -51,17 +59,5 @@
 
       
     </div>
-
-  
-
-  <!-- Whatever you wrap with the '<window>' component will be rendered on a new window  -->
-<!--  <window *ngIf="showPortal">-->
-<!--    <h2>Hello world from amother window!!</h2>-->
-<!--    <button (click)="this.showPortal = false">Close me!</button>-->
-<!--    <app-user-chat [recuerId]="rescuerUsername">-->
-<!--    </app-user-chat>-->
-<!--  </window>-->
-
-
 
 </div>

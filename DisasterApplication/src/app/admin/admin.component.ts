@@ -14,6 +14,8 @@ import {Router} from "@angular/router";
 })
 export class AdminComponent implements OnInit {
 
+  // Naming the variables that needs to be initialized
+
   public userArray: any = [];
   public notificationMessage;
   public userNameToBeDeleted = "";
@@ -21,6 +23,7 @@ export class AdminComponent implements OnInit {
   public rescuerArray: any = [];
   public notificationMessages: any = [];
 
+  // Initializing the Users data
   user: User = {
     userName: "",
     latitude: "",
@@ -31,8 +34,7 @@ export class AdminComponent implements OnInit {
 
   };
 
-
-
+// Initializing the Rescuers data
   rescuer: Rescuer = {
     rescuerName: "",
     latitude: "",
@@ -61,14 +63,14 @@ export class AdminComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getUserList();
-    this.getRescuerList();
+    this.getUserList();                 // Calling the function getUserList()
+    this.getRescuerList();              // Calling the function getRescuerList()
   }
 
   UsersAction(){
-
   }
 
+  // This function loads the User data from the database through an API call
   private getUserList(): void {
       this.adminService.getUserList().subscribe(res => {
         console.log(res.length);
@@ -84,6 +86,7 @@ export class AdminComponent implements OnInit {
     this.userArray.filter = filterValue.trim().toLowerCase();
   }
 
+  // This function loads all the users from the database and display them on Admin Page
   public addMultipleUser(): void {
     this.adminService.addMultipleUsers().subscribe(res => {
       alert(res.message);
@@ -95,6 +98,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // This function clears all the users from the Admin Page
   public clearAllUsers(): void {
     this.adminService.clearAllUsers().subscribe(res => {
       alert(res.message);
@@ -104,6 +108,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // This function deletes a specific user from the database
   public deleteUser(): void {
     if(this.userNameToBeDeleted.trim() === "") {
       alert("user field cannot be left empty");
@@ -118,7 +123,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
-
+// This function loads the Rescuers data from the database through an API call
   private getRescuerList(): void {
     this.adminService.getAllRescuers().subscribe(res => {
       console.log(res.length);
@@ -129,6 +134,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // This function loads all the Rescuers from the database and display them on Admin Page
   public addMultipleRescuer(): void {
     this.adminService.addMultipleRescuers().subscribe(res => {
       alert(res.message);
@@ -140,6 +146,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // This function clears all the Rescuerss from the Admin Page
   public clearAllRescuer(): void {
     this.adminService.clearAllRescuers().subscribe(res => {
       alert(res.message);
@@ -149,6 +156,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // This function allows to the Admin to manually add a User from the Admin Page
   public addUser(): void {
     if(this.userNameToBeAdded.trim() !== "" || this.latitude.trim() !== "" || this.longitude.trim() !== "") {
       this.user.userName = this.userNameToBeAdded;
@@ -167,7 +175,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
-
+  // This function allows to the Admin to manually add a Rescuer from the Admin Page
   public addRescuer(): void {
     if(this.rescuerNameToBeAdded.trim() !== "" && this.rescuerlatitude.trim() !== "" && this.rescuerlongitude.trim() !== "") {
       this.rescuer.rescuerName = this.rescuerNameToBeAdded;
@@ -186,6 +194,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  // This function allows to the Admin to manually delete a specific Rescuer from the Admin Page
   public deleteRescuer(): void {
     if(this.rescuerNameToBeDeleted.trim() === "") {
       alert("rescuer name field cannot be left empty");
@@ -200,6 +209,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  // This function allows to the Admin to send notification message to the Users
   public sendNotificationToUser(): void {
       this.adminService.sendNotificationToUser(this.notificationMessage).subscribe(res => {
         alert(res.notificationMessage);
@@ -210,6 +220,7 @@ export class AdminComponent implements OnInit {
 
   }
 
+  // This function allows to the Admin to send notification message to the Rescuers
   public sendNotificationToRescuer(): void {
       this.adminService.sendNotificationToRescuer(this.notificationMessage).subscribe(res => {
         alert(res.notificationMessage);
@@ -219,6 +230,7 @@ export class AdminComponent implements OnInit {
       });
   }
 
+  // This function display all the notifications send to the users and the rescuers by the admin on Admin page
   public getAllNotification() : void {
     this.adminService.getAllNotificationMessage().subscribe(res => {
       console.log(res.length);
@@ -231,6 +243,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // This functions updates the status of the Rescuer whether he is active and rescuing or taking a break
   public UpdateRescuerStatus(): void {
     this.adminService.updateRescuerStatus(this.rescuerNameForStatus, this.rescuerstatusToUpdate).subscribe(res => {
       alert(res.message);
@@ -240,9 +253,10 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // This function opens a new window on the Admin Page to have a real time chat with the Rescuers
   public startChat() {
     window.open('http://localhost:4200/chat?userName=Admin', '', 'width=600,height=400,left=200,top=200');
-    //this.router.navigate(['/chat'], { queryParams: { userName: "Admin" }} );
+    
   }
 
 

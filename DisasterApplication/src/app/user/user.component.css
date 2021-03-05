@@ -5,18 +5,9 @@
     width: 1340px;
     margin: 0%;
     margin: 7px;
-    /* background-color:grey ; */
-
   }
 
 
-/* #logoBox{
-  background-image: url(FRAlogo.jpg);
-  width: 113px;
-  height: 59px;
-  margin-top: -4.0%;
-  margin-left: 92%;
-} */
 /* For fra logo to be centered within a div */
 img, svg {
   vertical-align: middle;
@@ -24,9 +15,6 @@ img, svg {
     height: 93%;
 }
 
-/* #ApplogoBox{
-  
-} */
 
   #title{
 
@@ -37,18 +25,16 @@ img, svg {
     padding: 7px;
     color: antiquewhite;
     
-
-
   }
 
 
   #map {
     height: 550px;
-    /* height: 583px; */
     width: 1000px;
     position: absolute;
     right: 1px;
     background-image: url(/assets/img/background.png);
+
   }
 
   #userMessage{
@@ -71,16 +57,14 @@ img, svg {
 
   }
 
-
+  /* Ask for Help Button */
   .button1{
 
     padding-left: 27px;
     padding-top: 5px;
-
-
   }
 
-
+/* Show Nearby Victim Button */
   .button2{
     padding-top: 20px;
     padding-left: 40px;
@@ -89,33 +73,11 @@ img, svg {
     color:#b22222;
   }
 
-  /* .button3{
-    padding-top: 25px;
-    padding-left: 27px;
-  }
-   */
 
-  /* .leaflet-marker-icon.huechange{
-    filter: hue-rotate(200deg);
-  } */
 
   img.huechange { filter: hue-rotate(120deg); }
 
-  /* .huechange {
-    filter: hue-rotate(200deg); */
-  /* background-color: black;
-  color:black;
-  fill: black;
-  background: black; */
 
-
-
-/* .my-div-icon{
-color:black;
-background-color: chartreuse;
-background-image: url(http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|abcdef&chf=a,s,ee00FFFF);
-
-}  */
 
 
 

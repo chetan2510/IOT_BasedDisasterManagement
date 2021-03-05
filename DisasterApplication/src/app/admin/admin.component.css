@@ -4,18 +4,15 @@
     
 }
 
-/* Logo centered to the div */
+/*To centre Logo to the div */
 img, svg {
     vertical-align: middle;
     max-width: 102%;
   }
 
-
-
 h1 {
     width:500px;
     margin: 0 auto;
-     /* background: blue; */
     text-align: center;
 }
 
@@ -46,15 +43,7 @@ margin-left: 42%;
 width: 231px;
 }
 
-/* #healthStutus1{
-    width:50px;
-} */
-
 .bg-light {
     background-color: #c5c5bd;
 }
 
-/* #UserActionsContainer{
-    background-image: "src/app/admin/background.png";
-    background-color:lightblue ;
-} */

@@ -5,6 +5,7 @@
 
 <div>
 
+  <!-- TO display messages send by Admin and Rescuers -->
   <table class="table table-hover" *ngIf="greetings">
 
     <tbody>
@@ -13,15 +14,7 @@
     </tr>
     </tbody>
   </table>
-<!--<div *ngFor="let string of greetings">-->
-<!--  <div>-->
-<!--    <table>-->
-<!--    <td>-->
-<!--      <tr>{{string}}</tr>-->
-<!--    </td>-->
-<!--    </table>-->
-<!--  </div>-->
-<!--</div>-->
+
 
 <div>
 
@@ -31,7 +24,10 @@
     <text>
 
     </text>
+
     <br>
+
+    <!-- To display Chat box with Send Button -->
     <div class="input-group" style="width: 64%;">
     <div class="input-group-prepend">
       <span class="input-group-text">Chat Message</span>

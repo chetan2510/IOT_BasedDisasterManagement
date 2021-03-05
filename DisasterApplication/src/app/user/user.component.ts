@@ -17,9 +17,9 @@ declare const L: any;
 
 export class UserComponent implements OnInit {
 
-   timeData: any;
-  //  timeData = 120;
-  //date = new Date('2019-01-26T00:00:00');
+// Naming the variables that needs to be initialized
+
+  timeData: any;
   public mymap: any;
   public title = 'Disaster Management App';
   private userNotification;
@@ -40,6 +40,8 @@ export class UserComponent implements OnInit {
   public userArray: any = [];
   private markersLayer;
 
+
+  // Initializing the users data
   user: User = {
     userName: "",
     latitude: "",
@@ -55,14 +57,15 @@ export class UserComponent implements OnInit {
     this.markersLayer = new L.layerGroup();
   }
 
-public changeSelectionOverviewExample(value){
+  // Saving the value of Emergency type Dropdown in a variable 
+public changeSelectionEmergencyType(value){
   this.useremergencyType = value
 }
-
+// Saving the value of Severity Dropdown in a variable
   public changeSelectionSeverity(value){
     this.useremergencySeverity = value
   }
-
+// Saving the value of Status type Dropdown in a variable
   public changeSelectionStatus(value){
     this.uservictimHealthStatus = value
   }
@@ -91,32 +94,30 @@ public changeSelectionOverviewExample(value){
   ];
 
   ngOnInit() {
-    this.generateMap();
-    // this.getDistance();
+    this.generateMap();                  // Calling the function generateMao()
+    // this.getDistance();               // Calling the function getDistance()
   }
 
-  // triggerFunction() {
-  //   console.log('Timer Ended');
-  // }
 
   handleEvent(event){
     console.log(event)
   };
 
   async plotOnMap()  {
-    this.ifClicked = false;
+    this.ifClicked = false;              // Initializing a boolean value 
     while (true) {
-    this.markersLayer.clearLayers();
-    await   this.makeAnAPICall();
-    this.plotLatsOnMap();
-    await this.getUserNotification();
-    await this.delay(5000);
+    this.markersLayer.clearLayers();     // This is a layer on the map. Initially clearing the layers so that no markers are left on the layer
+    await   this.makeAnAPICall();        // To fet the user data from the database
+    this.plotLatsOnMap();                // To plot the user's position on the map using custom markers
+    await this.getUserNotification();    // Display the notifications send by the Admins
+    await this.delay(5000);              // Continuing the process after every 5 secs, to see if any new user is added and plot it on the map
 
   }
 
 
   }
 
+  /* The generateMap() function displays the complete map on the font-end with user's position on the map*/
   generateMap(){
 
     if (!navigator.geolocation) {
@@ -124,23 +125,28 @@ public changeSelectionOverviewExample(value){
     }
 
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      const coords = position.coords;
-      this.longitude = coords.longitude;
-      this.latitude = coords.latitude;
-      //const latLong = [coords.latitude, coords.longitude];
+    /*---- Code to fetch the current location using GPS- POssible Extension to the project----*/
 
-      console.log(
-        `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
-      );
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //   const coords = position.coords;
+    //   this.longitude = coords.longitude;
+    //   this.latitude = coords.latitude;
+    //   //const latLong = [coords.latitude, coords.longitude];
 
-    });
-      const latLong=[50.120350,8.651000];
+    //   console.log(
+    //     `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
+    //   );
 
-       this.mymap = L.map('map').setView(latLong, 10);
+    // });
+    /*--------------------------------------------------------------------------------------- */
 
-      L.tileLayer(
-        'assets/map/{z}/{x}/{y}.png',
+
+      const latLong=[50.120350,8.651000];            // Initializing the latitudes and longitudes
+       this.mymap = L.map('map').setView(latLong, 10);  //Plot the latitude and longitude of the user on map with zoom 9
+
+
+      L.tileLayer(                           // Initializing map tiles.
+        'assets/map/{z}/{x}/{y}.png',       // Loading the already saved map tiles from the "map" folder 
         {
           // attribution:
           //   'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -151,19 +157,19 @@ public changeSelectionOverviewExample(value){
           // accessToken: 'your.mapbox.access.token',
         }
       ).addTo(this.mymap);
-
-  var redIcon = L.icon({
+      
+    /* Taking the image of red marker to be plotted on the map */
+   var redIcon = L.icon({
     iconUrl: 'assets/img/red_shadow.png',
-   // iconRetinaUrl: 'img/marker-icon-2x-black.png',
     iconSize:     [25, 41], // size of the icon
-
 });
 
-     let marker =L.marker (latLong, {icon: redIcon}).addTo(this.mymap);
-      marker.bindPopup('<b>You</b>').openPopup();
-      //marker._icon.classList.add("huechange");
+     let marker =L.marker (latLong, {icon: redIcon}).addTo(this.mymap);  // Plotting the custom markers on the map
+      marker.bindPopup('<b>You</b>').openPopup();                        // To Pop up a dialog box on users location  
+      
 
-// //    HERE
+ /* ----Code to show the distance between two markers- POssible Extension to the project----*/
+
 // var markerFrom = L.marker([50.120033,8.6527636], { color: "#F00", radius: 10 });
 // var markerTo =  L.circleMarker([50.161064818858684,8.748550415039064], { color: "#4AFF00", radius: 10 });
 // var from = markerFrom.getLatLng();
@@ -176,23 +182,26 @@ public changeSelectionOverviewExample(value){
 
 // console.log("distance from point a to point B",from.distanceTo(to).toString(),"m");
 
-// // Here
+/* ----------------------------------------------------------------------------------------*/
 
+
+    /* To plot a radius of certain diameter to show the area affected by disaster   */
       var circle = L.circle(latLong, {
         color: '#ff6666',
         fillColor: '#f03',
         fillOpacity: 0.5,
         radius: 14000
-
     }).addTo(this.mymap);
+
+    /* To display a popup on the radious that the user is in a disaster situation */
       let popup = L.popup()
         .setLatLng(latLong)
         .setContent('You are in Disaster Zone')
         .openOn(this.mymap);
-   // });
-    //this.watchPosition();
+
   }
 
+  /* Making an API call to the database to load the data of the users to be plot on the map */
   async makeAnAPICall() {
     this.latitude = [];
     this.longitude = [];
@@ -205,14 +214,12 @@ public changeSelectionOverviewExample(value){
       };
  }
 
-
-   plotLatsOnMap(): void {
+/* Once the latitudes and longitudes of all the users are fetched using the makeAnAPICall() function, this function plots them on the map using red marker  */
+plotLatsOnMap(): void {
      let marker;
      var redIcon = L.icon({
       iconUrl: 'assets/img/red_shadow.png',
-     // iconRetinaUrl: 'img/marker-icon-2x-black.png',
       iconSize:     [25, 41], // size of the icon
-
   });
      for(let i = 0; i < this.latitude.length; i++) {
 
@@ -222,51 +229,22 @@ public changeSelectionOverviewExample(value){
      this.markersLayer.addTo(this.mymap);
    }
 
-  watchPosition() {
-    let desLat = 0;
-    let desLon = 0;
-    let id = navigator.geolocation.watchPosition(
-      (position) => {
-        console.log(
-          `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
-        );
-        if (position.coords.latitude === desLat) {
-          navigator.geolocation.clearWatch(id);
-        }
-      },
-      (err) => {
-        console.log(err);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-      }
-    );
-  }
-
+  /* This function displays the notification on the User's page send my the Admin  */
   public async getUserNotification() {
     const res= await this.adminService.getUserNotification().toPromise();
     if( res.notificationMessage !== "undefined" && res.notificationMessage !== "") {
       alert("Message from admin: "+res.notificationMessage);
       }
-    // ,(error: HttpErrorResponse) => {
-    //   alert(error.error.message);
-    // });
-   await this.delay(6000);
+   await this.delay(6000);        // After every 6 secs, the function checks if there is any notification send my admin
   }
 
-  delay(ms: number) {
+  /* Function to intriduce delay in a process */
+    delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
+  /* This function sends the user data[Name,Emergency Type, Emergency Severity,HEalth status,latitude,longitude,] to the back end to be saved in the database */
   public sendUserDataToBackend() : void {
-
-    //this.timeData = 120;
-
-
-
-
 
       if(this.userNameToBeAdded !== "" && this.uservictimHealthStatus !== "" && this.useremergencyType !== ""  && this.useremergencySeverity !== "") {
       this.user.userName = this.userNameToBeAdded;
@@ -283,13 +261,12 @@ public changeSelectionOverviewExample(value){
         this.ifShowNearbyVictims = true;    // "Show Neary VIctims" button to be removed upon click
     }
 
-
     else {
-      this.toastr.warning("Please fill all the fields before asking for help");
+      this.toastr.warning("Please fill all the fields before asking for help"); // If the form is not filled by the user, an error will be displayed
       this.ifClickedbutton1 = true;
     }
 
-    this.timeData = 120;
+    this.timeData = 120;                // Time value to be displayed on a count down timer on the front end
   }
 
 

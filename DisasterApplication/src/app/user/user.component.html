@@ -1,30 +1,29 @@
 <div id="main_container">
 
-
   <div id="title">
+      <h2> Disaster Management Application   </h2>
 
-     <h2> Disaster Management Application   </h2>
-
-    <!-- <div id="image"> <img src="FRAlogo.jpg" width="40%" height="30"alt=""/> </div>   -->
-    <!-- <img src="FRAlogo.jpg" width="20px" height="30px"object-fit:cover > -->
-    <div id="logoBox"  style="width: 113px; height: 59px;margin-top: -3.9%;margin-left: 92%;">
+      <!-- To display Frankfurt University Logo -->
+     <div id="logoBox"  style="width: 113px; height: 59px;margin-top: -3.9%;margin-left: 92%;">
       <img src="/assets/img/FRAlogo.jpg">
-    </div>
-    <div id="ApplogoBox"  style="width: 113px; height: 59px;margin-top: -4.4%;margin-left: -2.7%;">
+     </div>
+
+     <!-- To display Application Logo -->
+     <div id="ApplogoBox"  style="width: 113px; height: 59px;margin-top: -4.4%;margin-left: -2.7%;">
       <img src="/assets/img/logo.png" style="vertical-align: middle;max-width: 102%;height: 93%;">
-    </div>
+     </div>
   </div>
 
+  <!-- To display the map in this container -->
   <div id="map">
 
   </div>
 
-
+<!-- Display all the three dropdowns -->
   <div id="dropdown">
-
     <h4 style="color: rgb(48, 49, 51)">Fill the form for help</h4>
-    <!-- <br> -->
-
+  
+<!-- Display Name form -->
     <div class="input-group input-group-sm mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
@@ -32,17 +31,17 @@
       <input [(ngModel)]='userNameToBeAdded' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
     </div>
 
-    <!-- <input [(ngModel)]='userNameToBeAdded' placeholder="Rescuer Name"/> -->
-
+    <!-- Display Emergency Type DropDown-->
     <mat-form-field appearance="fill">
       <mat-label> Emergency Type</mat-label>
-      <mat-select (selectionChange)="changeSelectionOverviewExample($event.value)">
+      <mat-select (selectionChange)="changeSelectionEmergencyType($event.value)">
         <mat-option *ngFor="let food of foods" [value]="food.value">
           {{food.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
+    <!-- Display Severity Level DropDown-->
     <mat-form-field appearance="fill">
       <mat-label>Severity Level</mat-label>
       <mat-select (selectionChange)="changeSelectionSeverity($event.value)">
@@ -52,6 +51,7 @@
       </mat-select>
     </mat-form-field>
 
+    <!-- Display Health Status DropDown-->
     <mat-form-field appearance="fill">
       <mat-label>Health Status</mat-label>
       <mat-select (selectionChange)="changeSelectionStatus($event.value)">
@@ -61,7 +61,7 @@
       </mat-select>
     </mat-form-field>
 
-
+    <!-- Display Ask for Help Button-->
     <div class="button1">
       <button *ngIf="ifClickedbutton1" type="button" (click)="sendUserDataToBackend()" class="btn btn-outline-secondary mr-2" placement="top"
               style="background-color:#b22222;color: linen;height: 45px;width: 150px;">
@@ -69,76 +69,29 @@
       </button>
     </div>
 
+<!-- Display Show Nearby Victim button only when Ask for Help button is pressed-->
     <div style="padding-top: 30px; padding-left: 18px;">
       <button *ngIf="ifClicked && ifShowNearbyVictims" type="button" (click)="plotOnMap()" class="btn btn-outline-secondary mr-2"
               ngbPopover="Displaying all Rescue Centres near you" popoverTitle="Rescue Centres near you">
         Show Nearby Victims
       </button>
-
     </div>
+
     <br>
 
-
+<!-- Display the timer only when Ask for Help button is pressed-->
      <div id="Timer" *ngIf="ifClicked && ifShowNearbyVictims" >
-
       <div class="input-group input-group-sm mb-3">
-
         <div class="input-group-prepend" style="color:firebrick;font-weight:600;padding-left: 27px;">
           <h5><b>Help Reaching In</b></h5>
           <span style="color:black;font-size: x-large;font-weight: 600;background-color:#eac036;text-align: center;"class="input-group-text" id="inputGroup-sizing-sm"><br> <countdown [config]="{leftTime: timeData}" (event)="handleEvent($event)"> </countdown>  </span>
-
         </div>
-
-        <!-- <input [(ngModel)]='userNameToBeAdded' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> -->
-
       </div>
-
-
-      <!-- <h5>Help Coming In:</h5>
-      <countdown [config]="{leftTime: timeData}" (event)="handleEvent($event)"></countdown> -->
-
-
-      <!-- Timer mode:
-<countdown-timer [start]="date"></countdown-timer>
-
-Countdown:
-<countdown-timer [end]="date"></countdown-timer>
-
-Countdown with zero trigger:
-<countdown-timer (zeroTrigger)="triggerFunction()" [end]="date"></countdown-timer> -->
     </div>
 
 
-    <!-- <div id="userMessage">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Notification Message</span>
-        </div>
-        <textarea input type ="text" [(ngModel)]='notificationMessage' class="form-control" aria-label="With textarea"></textarea>
-
-      </div>
-    </div> -->
-
   </div>
 
-<!--  <div id="userMessage">-->
-<!--    <div class="input-group">-->
-<!--      <div class="input-group-prepend" >-->
-<!--        <span style="background-color: #ced4da;" class="input-group-text">Notification Message</span>-->
-<!--      </div>-->
-<!--      <textarea input type ="text" style="height:80px" [(ngModel)]='notificationMessage' class="form-control" placeholder="Please type your message here " aria-label="With textarea"></textarea>-->
-<!--      <button class="btn btn-primary" style="height:80px;background-color:firebrick;border-color: bisque;" (click) = "sendNotificationMessage()"> Send Message </button>-->
-<!--    </div>-->
-
-<!--  </div>-->
 
 </div>
 
-
-<!-- Copyright 2020 Google LLC. All Rights Reserved.
-        Use of this source code is governed by an MIT-style license that
-        can be found in the LICENSE file at http://angular.io/license
--->
-
-
-<!-- <router-outlet></router-outlet> -->

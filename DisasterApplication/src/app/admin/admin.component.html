@@ -46,11 +46,17 @@
 
 <!------ To display the Contents if the of USER ACTION button is pressed ------->
 <div id="UserActionsContainer" *ngIf="UsersAction" >
- 
+
   <br>
 
   <div style=color:#0d6efd >
     <h1>Users Component</h1>
+  </div>
+
+  <br>
+
+  <div style=" max-width: 70px;height: 72px;float: left;">
+    <img src="../assets/img/reload.jpeg" (click)="makeMultipleCallsUsers()">
   </div>
 
   <br>
@@ -181,6 +187,12 @@
   <h1>Rescuers Component</h1>
 </div>
 
+  <br>
+
+  <div style=" max-width: 70px;height: 72px;float: left;">
+    <img src="../assets/img/reload.jpeg" (click)="makeMultipleCallsRescuers()">
+  </div>
+
 <br>
 
 <div id="AddMultipleUsers">
@@ -201,7 +213,6 @@
 
 
   <div id="Chat">
-  
     <button class="btn btn-secondary" (click)="this.startChat()"> Chat with Rescuers</button>
   </div>
 </div>

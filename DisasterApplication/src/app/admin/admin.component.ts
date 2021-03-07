@@ -63,9 +63,11 @@ export class AdminComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getUserList();                 // Calling the function getUserList()
-    this.getRescuerList();              // Calling the function getRescuerList()
+      this.getUserList();                 // Calling the function getUserList()
+      this.getRescuerList();
+    // Calling the function getRescuerList()
   }
+
 
   UsersAction(){
   }
@@ -256,8 +258,21 @@ export class AdminComponent implements OnInit {
   // This function opens a new window on the Admin Page to have a real time chat with the Rescuers
   public startChat() {
     window.open('http://localhost:4200/chat?userName=Admin', '', 'width=600,height=400,left=200,top=200');
-    
+
   }
+
+  public makeMultipleCallsUsers() {
+      this.getUserList();
+  }
+
+  public makeMultipleCallsRescuers() {
+    this.getRescuerList();
+  }
+
+/* Function to intriduce delay in a process */
+delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
 
 }

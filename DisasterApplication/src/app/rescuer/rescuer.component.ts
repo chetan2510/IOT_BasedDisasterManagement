@@ -176,12 +176,12 @@ this.users = [];
       this.longitude = coords.longitude;
       this.latitude = coords.latitude;
       //const latLong = [coords.latitude, coords.longitude];
-      const latLong=[50.120350,8.651000];
+      const latLong=[50.1001,8.6521];
       console.log(
         `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
       );
     });
-    const latLong=[50.120350,8.651000];
+    const latLong=[50.1001,8.6521];
       this.mymap = L.map('map').setView(latLong, 10);
 
       L.tileLayer(

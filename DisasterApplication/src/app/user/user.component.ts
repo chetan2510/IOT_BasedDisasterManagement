@@ -26,6 +26,7 @@ export class UserComponent implements OnInit {
   public ifClicked = true;                    // "Show Neary VIctims" button to be removed upon click
   public ifShowNearbyVictims = false;
   public ifClickedbutton1 = true;             // "Ask For help" Button to be removed upon click"
+  public showTimer = false;
 
 
   public userNameToBeAdded = "";
@@ -57,7 +58,7 @@ export class UserComponent implements OnInit {
     this.markersLayer = new L.layerGroup();
   }
 
-  // Saving the value of Emergency type Dropdown in a variable 
+  // Saving the value of Emergency type Dropdown in a variable
 public changeSelectionEmergencyType(value){
   this.useremergencyType = value
 }
@@ -104,14 +105,13 @@ public changeSelectionEmergencyType(value){
   };
 
   async plotOnMap()  {
-    this.ifClicked = false;              // Initializing a boolean value 
+    this.ifClicked = false;              // Initializing a boolean value
     while (true) {
     this.markersLayer.clearLayers();     // This is a layer on the map. Initially clearing the layers so that no markers are left on the layer
     await   this.makeAnAPICall();        // To fet the user data from the database
     this.plotLatsOnMap();                // To plot the user's position on the map using custom markers
     await this.getUserNotification();    // Display the notifications send by the Admins
     await this.delay(5000);              // Continuing the process after every 5 secs, to see if any new user is added and plot it on the map
-
   }
 
 
@@ -141,12 +141,12 @@ public changeSelectionEmergencyType(value){
     /*--------------------------------------------------------------------------------------- */
 
 
-      const latLong=[50.120350,8.651000];            // Initializing the latitudes and longitudes
+      const latLong=[50.1001,8.6521];         // Initializing the latitudes and longitudes
        this.mymap = L.map('map').setView(latLong, 10);  //Plot the latitude and longitude of the user on map with zoom 9
 
 
       L.tileLayer(                           // Initializing map tiles.
-        'assets/map/{z}/{x}/{y}.png',       // Loading the already saved map tiles from the "map" folder 
+        'assets/map/{z}/{x}/{y}.png',       // Loading the already saved map tiles from the "map" folder
         {
           // attribution:
           //   'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -157,7 +157,7 @@ public changeSelectionEmergencyType(value){
           // accessToken: 'your.mapbox.access.token',
         }
       ).addTo(this.mymap);
-      
+
     /* Taking the image of red marker to be plotted on the map */
    var redIcon = L.icon({
     iconUrl: 'assets/img/red_shadow.png',
@@ -165,8 +165,8 @@ public changeSelectionEmergencyType(value){
 });
 
      let marker =L.marker (latLong, {icon: redIcon}).addTo(this.mymap);  // Plotting the custom markers on the map
-      marker.bindPopup('<b>You</b>').openPopup();                        // To Pop up a dialog box on users location  
-      
+      marker.bindPopup('<b>You</b>').openPopup();                        // To Pop up a dialog box on users location
+
 
  /* ----Code to show the distance between two markers- POssible Extension to the project----*/
 
@@ -248,13 +248,14 @@ plotLatsOnMap(): void {
 
       if(this.userNameToBeAdded !== "" && this.uservictimHealthStatus !== "" && this.useremergencyType !== ""  && this.useremergencySeverity !== "") {
       this.user.userName = this.userNameToBeAdded;
-      this.user.latitude = this.latitude;
-      this.user.longitude = this.longitude;
+      this.user.latitude = "50.1001";
+      this.user.longitude = "8.6521";
       this.user.emergencySeverity = this.useremergencySeverity
       this.user.emergencyType = this.useremergencyType
       this.user.victimHealthStatus = this.uservictimHealthStatus
       this.adminService.addUser(this.user).subscribe(res => {
         alert(res.message);
+        this.showTimer = true;
       }, (error: HttpErrorResponse) => {
         alert(error.error.message);});
         this.ifClickedbutton1 = false;      //  "Ask For help" Button to be removed upon click

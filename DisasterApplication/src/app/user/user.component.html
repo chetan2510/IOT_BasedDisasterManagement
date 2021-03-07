@@ -20,11 +20,11 @@
   </div>
 
 <!-- Display all the three dropdowns -->
-  <div id="dropdown">
-    <h4 style="color: rgb(48, 49, 51)">Fill the form for help</h4>
-  
+  <div id="dropdown" >
+    <h4 style="color: rgb(48, 49, 51)" *ngIf="ifClickedbutton1">Fill the form for help</h4>
+
 <!-- Display Name form -->
-    <div class="input-group input-group-sm mb-3">
+    <div class="input-group input-group-sm mb-3" *ngIf="ifClickedbutton1">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
       </div>
@@ -32,7 +32,7 @@
     </div>
 
     <!-- Display Emergency Type DropDown-->
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" *ngIf="ifClickedbutton1">
       <mat-label> Emergency Type</mat-label>
       <mat-select (selectionChange)="changeSelectionEmergencyType($event.value)">
         <mat-option *ngFor="let food of foods" [value]="food.value">
@@ -42,7 +42,7 @@
     </mat-form-field>
 
     <!-- Display Severity Level DropDown-->
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" *ngIf="ifClickedbutton1">
       <mat-label>Severity Level</mat-label>
       <mat-select (selectionChange)="changeSelectionSeverity($event.value)">
         <mat-option *ngFor="let item of items" [value]="item.value">
@@ -52,7 +52,7 @@
     </mat-form-field>
 
     <!-- Display Health Status DropDown-->
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" *ngIf="ifClickedbutton1">
       <mat-label>Health Status</mat-label>
       <mat-select (selectionChange)="changeSelectionStatus($event.value)">
         <mat-option *ngFor="let product of products" [value]="product.value">
@@ -80,13 +80,37 @@
     <br>
 
 <!-- Display the timer only when Ask for Help button is pressed-->
-     <div id="Timer" *ngIf="ifClicked && ifShowNearbyVictims" >
+     <div id="Timer" *ngIf="showTimer" >
       <div class="input-group input-group-sm mb-3">
         <div class="input-group-prepend" style="color:firebrick;font-weight:600;padding-left: 27px;">
           <h5><b>Help Reaching In</b></h5>
           <span style="color:black;font-size: x-large;font-weight: 600;background-color:#eac036;text-align: center;"class="input-group-text" id="inputGroup-sizing-sm"><br> <countdown [config]="{leftTime: timeData}" (event)="handleEvent($event)"> </countdown>  </span>
         </div>
       </div>
+    </div>
+
+    <div>
+      <h6 *ngIf="showTimer" style="color: red">Network might be disabled due to disaster</h6>
+      <table class="table table-bordered mat-elevation-z8" *ngIf="showTimer">
+
+        <th><h5>Service</h5></th>
+        <th><h5>Telephone</h5></th>
+
+        <tbody>
+        <tr>
+          <td>Police advice and information</td>
+          <td>Tel: 069 7550</td>
+        </tr>
+        <tr>
+          <td>Flood Emergency</td>
+          <td>Tel: 061 311 9240</td>
+        </tr>
+        <tr>
+          <td>Frankfurt Citizens' Advice Helpline</td>
+          <td>Tel: 069 2124 0000</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
 
 

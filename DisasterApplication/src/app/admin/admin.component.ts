@@ -184,7 +184,7 @@ export class AdminComponent implements OnInit {
       this.rescuer.latitude = this.rescuerlatitude;
       this.rescuer.longitude = this.rescuerlongitude;
       this.rescuer.status = "Active";
-      this.rescuer.password = this.rescuerpassword;
+      this.rescuer.password = "qwertyuiop";
 
       this.adminService.addRescuer(this.rescuer).subscribe(res => {
         alert(res.message);

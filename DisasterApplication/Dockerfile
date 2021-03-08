@@ -5,6 +5,7 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 RUN npm install -g @angular/cli
+RUN npm install leaflet.offline@next
 COPY . /app
 EXPOSE 4200/tcp
 #RUN npm start #executes 'ng serve --host 0.0.0.0' #removed!
